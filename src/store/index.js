@@ -17,18 +17,10 @@ export default new Vuex.Store({
     commands: {
       rebuild: ['php artisan scaffold -f'],
       fresh: ['php artisan scaffold -f', 'php artisan migrate:fresh --seed', 'composer dump-autoload'],
-    }
+    },
+    last_child_report: []
   },
   mutations: {
-    loadConfigs (state) {
-      if (state.file) {
-        state.scaffold = JSON.parse(
-            String(
-                window.fs.readFileSync(state.file)
-            )
-        );
-      }
-    },
     addModel (state, model) {
       if (!model.name) {
         model.name = `model_${state.total}`;
@@ -152,6 +144,9 @@ export default new Vuex.Store({
       state.scaffold.push(model)
       state.total++;
       state.selected_model = active
+    },
+    setLastChildReport (state, val) {
+      state.last_child_report = val;
     }
   },
   getters: {

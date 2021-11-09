@@ -69,7 +69,7 @@
                 <model-seeds :key="`selected_edit_seeds_${model.id}`" />
             </v-card>
         </v-tab-item>
-        <v-tab-item style="height: calc(100vh - 156px);overflow-x: hidden">
+        <v-tab-item style="height: calc(100vh - 156px);overflow-x: hidden" class="container_statistic">
             <v-card flat>
                 <br>
                 <model-statistic :key="`selected_edit_statistic_${model.id}`" />

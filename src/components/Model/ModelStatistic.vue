@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container ref="s">
         <v-row>
             <v-col>
                 <v-simple-table dense>
@@ -51,6 +51,17 @@
                 </v-simple-table>
             </v-col>
         </v-row>
+        <v-divider></v-divider>
+        <v-subheader>The last child process log</v-subheader>
+        <v-container fluid>
+            <v-row>
+                <v-col>
+                    <template v-for="(s,k) in last_child_report">
+                        <pre :key="`lcp_${k}`">{{s}}</pre>
+                    </template>
+                </v-col>
+            </v-row>
+        </v-container>
     </v-container>
 </template>
 
@@ -59,16 +70,23 @@ export default {
     name: 'model-statistic',
     data () {
         return {
-
+            t: 0
         }
     },
     watch: {
-
+        last_child_report () {
+            if (this.t) clearTimeout(this.t);
+            this.t = setTimeout(() => document.querySelector('.container_statistic').scrollTop = 999999999999999999999999, 100)
+        }
     },
     computed: {
         model () {
             return this.$store.getters.model
         },
+        last_child_report: {
+            get () { return this.$store.state.last_child_report; },
+            set (val) { this.$store.commit('setLastChildReport', val); }
+        }
     },
     methods: {
 

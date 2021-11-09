@@ -20,13 +20,17 @@ export class Child {
     }
 
     promiseFromChildProcess(child, out = []) {
+        window.app.clearReport();
         return new Promise(function (resolve, reject) {
             child.addListener("error", reject);
             child.addListener("exit", resolve);
             child.stdout.on("data", (d) => {
                 let line = d.trim().split(/\n/g);
                 //console.log(line);
-                line.map((i) => console.log(i));
+                line.map((i) => {
+                    console.log(i)
+                    window.app.toReport(i);
+                });
                 out.push(line)
             });
         }).catch((e) => {

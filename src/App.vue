@@ -48,7 +48,11 @@ export default {
     computed: {
       file () {
           return this.$store.getters.file
-      }
+      },
+        last_child_report: {
+          get () { return this.$store.state.last_child_report; },
+          set (val) { this.$store.commit('setLastChildReport', val); }
+        }
     },
 
     watch: {
@@ -59,11 +63,16 @@ export default {
 
     mounted() {
         window.app = this;
-        this.$store.commit('loadConfigs');
     },
 
     methods: {
-
+        clearReport () {
+            this.last_child_report = [];
+        },
+        toReport (text) {
+            this.last_child_report.push(text);
+            this.$store.commit('setLastChildReport', this.last_child_report);
+        }
     }
 };
 </script>
