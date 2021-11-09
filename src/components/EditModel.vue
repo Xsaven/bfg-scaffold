@@ -1,7 +1,7 @@
 <template>
     <v-tabs show-arrows v-model="model_tab">
         <v-tab>
-            <v-icon left>mdi-cogs</v-icon> {{ model.title }}
+            <v-icon left>mdi-cogs</v-icon> Model
         </v-tab>
         <v-tab>
             <v-icon left>mdi-format-text</v-icon> Fields
