@@ -60,20 +60,6 @@
         <v-row>
             <v-col cols="6">
                 <v-text-field
-                    label="Foreign field of model"
-                    v-model="foreign"
-                    hide-details="auto"
-                ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-                <v-autocomplete
-                    v-model="type"
-                    :items="relation_types"
-                    label="Select a model relation type"
-                ></v-autocomplete>
-            </v-col>
-            <v-col cols="6">
-                <v-text-field
                     label="Path of model"
                     v-model="path"
                     hide-details="auto"
@@ -86,6 +72,20 @@
                     hide-details="auto"
                 ></v-text-field>
             </v-col>
+            <v-col cols="12">
+                <v-text-field
+                    label="Foreign field of model"
+                    v-model="foreign"
+                    hide-details="auto"
+                ></v-text-field>
+            </v-col>
+<!--            <v-col cols="6">-->
+<!--                <v-autocomplete-->
+<!--                    v-model="type"-->
+<!--                    :items="relation_types"-->
+<!--                    label="Select a model relation type"-->
+<!--                ></v-autocomplete>-->
+<!--            </v-col>-->
             <v-col cols="6">
                 <v-combobox
                     v-model="traits"

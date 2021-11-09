@@ -21,56 +21,55 @@
                     <v-icon>mdi-close</v-icon>
                 </v-btn>
                 <v-toolbar-title>Settings</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-toolbar-items>
-                    <v-btn dark text @click="dialog = false">
-                        Save
-                    </v-btn>
-                </v-toolbar-items>
+<!--                <v-spacer></v-spacer>-->
+<!--                <v-toolbar-items>-->
+<!--                    <v-btn dark text @click="dialog = false">-->
+<!--                        Save-->
+<!--                    </v-btn>-->
+<!--                </v-toolbar-items>-->
             </v-toolbar>
 
-<!--            <v-list-->
-<!--                three-line-->
-<!--                subheader-->
-<!--            >-->
-<!--                <v-subheader>General</v-subheader>-->
-<!--                <v-list-item>-->
-<!--                    <v-list-item-action>-->
-<!--                        <v-checkbox v-model="notifications"></v-checkbox>-->
-<!--                    </v-list-item-action>-->
-<!--                    <v-list-item-content>-->
-<!--                        <v-list-item-title>Notifications</v-list-item-title>-->
-<!--                        <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>-->
-<!--                    </v-list-item-content>-->
-<!--                </v-list-item>-->
-<!--                <v-list-item>-->
-<!--                    <v-list-item-action>-->
-<!--                        <v-checkbox v-model="sound"></v-checkbox>-->
-<!--                    </v-list-item-action>-->
-<!--                    <v-list-item-content>-->
-<!--                        <v-list-item-title>Sound</v-list-item-title>-->
-<!--                        <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>-->
-<!--                    </v-list-item-content>-->
-<!--                </v-list-item>-->
-<!--                <v-list-item>-->
-<!--                    <v-list-item-action>-->
-<!--                        <v-checkbox v-model="widgets"></v-checkbox>-->
-<!--                    </v-list-item-action>-->
-<!--                    <v-list-item-content>-->
-<!--                        <v-list-item-title>Auto-add widgets</v-list-item-title>-->
-<!--                        <v-list-item-subtitle>Automatically add home screen widgets</v-list-item-subtitle>-->
-<!--                    </v-list-item-content>-->
-<!--                </v-list-item>-->
-<!--            </v-list>-->
-
             <v-divider />
+            <v-subheader>Paths to programs</v-subheader>
+            <v-container fluid>
+                <v-row>
+                    <v-col cols="6">
+                        <v-text-field
+                            label="Path to php"
+                            v-model="php"
+                            hide-details="auto"
+                        ></v-text-field>
+                    </v-col>
+                    <v-col cols="6">
+                        <v-text-field
+                            label="Path to Composer"
+                            v-model="composer"
+                            hide-details="auto"
+                        ></v-text-field>
+                    </v-col>
+                    <v-col cols="6">
+                        <v-text-field
+                            label="Path to Sail"
+                            v-model="sail"
+                            hide-details="auto"
+                        ></v-text-field>
+                    </v-col>
+                    <v-col cols="6">
+                        <v-text-field
+                            label="Path to CS-Fixer"
+                            v-model="cs_fixer"
+                            hide-details="auto"
+                        ></v-text-field>
+                    </v-col>
+                </v-row>
+            </v-container>
             <v-subheader>Commands</v-subheader>
             <v-container fluid>
                 <v-row>
                     <v-col cols="12">
                         <v-combobox
                             v-model="commands.rebuild"
-                            :items="commands.rebuild"
+                            :items="[...commands.rebuild, ...d_commands]"
                             clearable
                             multiple
                             label="Rebuild command pipeline"
@@ -80,7 +79,7 @@
                     <v-col cols="12">
                         <v-combobox
                             v-model="commands.fresh"
-                            :items="commands.fresh"
+                            :items="[...commands.fresh, ...d_commands]"
                             clearable
                             multiple
                             label="Fresh command pipeline"
@@ -101,7 +100,26 @@ export default {
             dialog: false,
             notifications: false,
             sound: true,
+            php: localStorage.getItem('php'),
+            composer: localStorage.getItem('composer'),
+            cs_fixer: localStorage.getItem('cs_fixer') ? localStorage.getItem('cs_fixer') : './vendor/bin/php-cs-fixer fix',
+            sail: localStorage.getItem('sail') ? localStorage.getItem('sail') : './vendor/bin/sail',
             widgets: false,
+            d_commands: require('../store/default_commands')
+        }
+    },
+    watch: {
+        php (val) {
+            localStorage.setItem('php',val);
+        },
+        cs_fixer (val) {
+            localStorage.setItem('cs_fixer',val);
+        },
+        composer (val) {
+            localStorage.setItem('composer',val);
+        },
+        sail (val) {
+            localStorage.setItem('sail',val);
         }
     },
     computed: {

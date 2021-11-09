@@ -74,15 +74,6 @@ export default {
     methods: {
         clone (index) {
             this.$store.commit('cloneModel', index);
-            //const model = Object.assign({}, this.items[index]);
-            //const active = this.active;
-            //this.$store.commit('incrementTotal');
-            //model.id = `model_${this.$store.state.total}`
-            //model.name = `${model.name}_copy`
-            //model.title = `${model.title} copy`
-            //this.items.push(model);
-            //this.$store.commit('setScaffold', this.items);
-            //this.active = this.items.length - 1
         }
     },
 }

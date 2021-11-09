@@ -61,6 +61,7 @@ export default {
             this.dialog = true;
             await window.child.exec(this.cmd);
             this.dialog = false;
+            if (window.app) window.app.changed = false;
         }
     }
 }

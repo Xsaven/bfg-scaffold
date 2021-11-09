@@ -9,7 +9,7 @@
 
         <v-spacer></v-spacer>
 
-        <run-rebuild></run-rebuild>
+        <run-rebuild :changed="changed"></run-rebuild>
 
         <run-fresh></run-fresh>
 
@@ -39,7 +39,7 @@ export default {
     name: 'App',
     components: {Home, RunFresh, RunRebuild, ResetScaffold, AddModel, Settings},
     data: () => ({
-
+        changed: localStorage.getItem('changed') === 'true'
     }),
 
     computed: {
@@ -48,8 +48,15 @@ export default {
       }
     },
 
+    watch: {
+        changed (val) {
+            localStorage.setItem('changed', val);
+        }
+    },
+
     mounted() {
-      this.$store.commit('loadConfigs');
+        window.app = this;
+        this.$store.commit('loadConfigs');
     },
 
     methods: {

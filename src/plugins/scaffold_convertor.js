@@ -44,7 +44,7 @@ export class ScaffoldConvertor {
         if (model.order.on && model.order.data) this.items[model.name].order = model.order.data;
         if (model.resource.on) this.items[model.name].resource = model.resource.data;
         if (model.observers.on) this.items[model.name].observer = model.observers.data;
-        if (Object.keys(model.prop).length) this.items[model.name].prop = model.prop;
+        if (Object.keys(model.prop).length) this.items[model.name].properties = model.prop;
         Object.keys(model.const).map(k => this.items[model.name].const[k] = model.const[k]);
         return this;
     }

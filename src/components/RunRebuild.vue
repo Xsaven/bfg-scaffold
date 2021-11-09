@@ -7,7 +7,10 @@
         <template v-slot:activator="{ on, attrs }">
             <v-tooltip bottom v-bind="attrs" v-on="on">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn text v-bind="attrs" v-on="on" @click="dialog = true; loading = false">
+<!--                    <v-btn text v-bind="attrs" v-on="on" @click="dialog = true; loading = false">-->
+<!--                        <v-icon>mdi-wrench</v-icon>-->
+<!--                    </v-btn>-->
+                    <v-btn text v-bind="attrs" v-on="on" @click="rebuild" :class="{red: changed}">
                         <v-icon>mdi-wrench</v-icon>
                     </v-btn>
                 </template>
@@ -41,7 +44,7 @@
 <script>
 export default {
     name: 'run-rebuild',
-    props: {},
+    props: {changed: {}},
     data () {
         return {
             dialog: false,
@@ -63,7 +66,7 @@ export default {
             this.dialog = true;
             await window.child.exec(this.cmd);
             this.dialog = false;
-            //this.loading = false;
+            if (window.app) window.app.changed = false;
         }
     }
 }

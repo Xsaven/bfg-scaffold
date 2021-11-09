@@ -19,12 +19,7 @@ function openDir () {
   }).then(result => {
     if (result.canceled) return app.quit();
     else {
-      let dir = result.filePaths[0];
-      if (fs.existsSync(path.join(dir, 'database', 'scaffold.json'))) {
-
-        return [dir];
-      }
-      return openDir()
+      return result.filePaths;
     }
   }).catch(() => {
     return openDir()
