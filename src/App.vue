@@ -18,6 +18,8 @@
         <v-spacer></v-spacer>
 
         <settings></settings>
+
+<!--        <packages></packages>-->
     </v-app-bar>
 
     <v-main>
@@ -35,6 +37,7 @@ import ResetScaffold from "./components/ResetScaffold";
 import RunRebuild from "./components/RunRebuild";
 import RunFresh from "./components/RunFresh";
 import Home from './views/Home'
+
 export default {
     name: 'App',
     components: {Home, RunFresh, RunRebuild, ResetScaffold, AddModel, Settings},
