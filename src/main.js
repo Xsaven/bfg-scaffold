@@ -7,10 +7,13 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 import draggable from 'vuedraggable';
 import JsonEditor from 'vue-json-edit'
+import {Child} from './plugins/child'
 
 Vue.use(JsonEditor);
 Vue.config.productionTip = false
 Vue.component('draggable', draggable);
+
+window.child = new Child;
 
 document.head.querySelector('title').innerText = document.head.querySelector('title').innerText +
     ` - [${window.root_dir}]`;

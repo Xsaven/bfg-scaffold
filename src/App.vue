@@ -21,7 +21,8 @@
     </v-app-bar>
 
     <v-main>
-      <router-view/>
+<!--      <router-view/>-->
+        <home />
     </v-main>
   </v-app>
 </template>
@@ -33,9 +34,10 @@ import AddModel from "./components/AddModel";
 import ResetScaffold from "./components/ResetScaffold";
 import RunRebuild from "./components/RunRebuild";
 import RunFresh from "./components/RunFresh";
+import Home from './views/Home'
 export default {
     name: 'App',
-    components: {RunFresh, RunRebuild, ResetScaffold, AddModel, Settings},
+    components: {Home, RunFresh, RunRebuild, ResetScaffold, AddModel, Settings},
     data: () => ({
 
     }),
