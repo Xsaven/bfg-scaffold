@@ -1,32 +1,57 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+        <add-model></add-model>
+
+        <v-spacer></v-spacer>
+
+        <run-rebuild></run-rebuild>
+
+        <run-fresh></run-fresh>
+
+        <reset-scaffold></reset-scaffold>
+
+        <v-spacer></v-spacer>
+
+        <settings></settings>
+    </v-app-bar>
+
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
+import Settings from "./components/Settings";
+import AddModel from "./components/AddModel";
+import ResetScaffold from "./components/ResetScaffold";
+import RunRebuild from "./components/RunRebuild";
+import RunFresh from "./components/RunFresh";
+export default {
+    name: 'App',
+    components: {RunFresh, RunRebuild, ResetScaffold, AddModel, Settings},
+    data: () => ({
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+    }),
 
-    &.router-link-exact-active {
-      color: #42b983;
+    computed: {
+      file () {
+          return this.$store.getters.file
+      }
+    },
+
+    mounted() {
+      this.$store.commit('loadConfigs');
+    },
+
+    methods: {
+
     }
-  }
-}
-</style>
+};
+</script>

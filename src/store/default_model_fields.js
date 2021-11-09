@@ -1,0 +1,15 @@
+module.exports = {
+    "keyType": "int",
+    "incrementing": true,
+    "preventsLazyLoading": false,
+    "perPage": 15,
+    "traitInitializers": [],
+    "globalScopes": [],
+    "ignoreOnTouch": [],
+    "modelsShouldPreventLazyLoading": false,
+    "dateFormat": "",
+    "snakeAttributes": true,
+    "visible": [],
+    "guarded": [],
+    "unguarded": [],
+};
