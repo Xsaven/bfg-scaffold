@@ -11,7 +11,14 @@
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title v-text="item.title"></v-list-item-title>
-                                    <v-list-item-subtitle v-text="item.name"></v-list-item-subtitle>
+                                    <v-list-item-subtitle>
+                                        <v-row>
+                                            <v-col cols="6">{{item.name}}</v-col>
+                                            <v-col cols="6">
+                                                <model-indicators :model="item" />
+                                            </v-col>
+                                        </v-row>
+                                    </v-list-item-subtitle>
                                 </v-list-item-content>
                                 <v-list-item-action>
                                     <v-tooltip bottom>
@@ -42,10 +49,12 @@
 <script>
 
 import EditModel from "./EditModel";
+import ModelIndicators from "./ModelIndicators";
 
 export default {
     name: "model-list",
     components: {
+        ModelIndicators,
         EditModel,
     },
     data: () => ({

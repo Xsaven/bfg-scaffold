@@ -12,7 +12,7 @@
                 <v-btn text :key="`constant_js_editor_del_${i}`" @click="drop(i)">
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>
-                <v-divider :key="`constant_js_editor_d_del_${i}`" />
+<!--                <v-divider :key="`constant_js_editor_d_del_${i}`" />-->
             </template>
             <v-fab-transition>
                 <v-btn
