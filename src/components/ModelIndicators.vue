@@ -6,7 +6,7 @@
                     mdi-update
                 </v-icon>
             </template>
-            <span><v-icon color="white">mdi-update</v-icon> Created/Updated at <v-divider /> {{model.created}}/{{model.updated}}</span>
+            <span><v-icon color="white">mdi-update</v-icon> <strong>Created/Updated at</strong> <v-divider /> {{model.created}}/{{model.updated}}</span>
         </v-tooltip>
         <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
@@ -14,7 +14,7 @@
                     mdi-semantic-web
                 </v-icon>
             </template>
-            <span><v-icon color="white">mdi-semantic-web</v-icon> Resource: {{model.resource.on}}/{{model.resource.data.length}}</span>
+            <span><v-icon color="white">mdi-semantic-web</v-icon> <strong>Resource:</strong> {{model.resource.on}}/{{model.resource.data.length}}</span>
             <v-divider v-if="model.resource.data.length" />
             <ul>
                 <li v-for="(r, i) in model.resource.data" :key="`s_fr_${i}_${r}`">{{r}}</li>
@@ -26,7 +26,7 @@
                     mdi-eye-circle
                 </v-icon>
             </template>
-            <span><v-icon color="white">mdi-eye-circle</v-icon> Observer: {{model.observers.on}}/{{model.observers.data.length}}</span>
+            <span><v-icon color="white">mdi-eye-circle</v-icon> <strong>Observer:</strong> {{model.observers.on}}/{{model.observers.data.length}}</span>
             <v-divider v-if="model.observers.data.length" />
             <ul>
                 <li v-for="(r, i) in model.observers.data" :key="`s_fo_${i}_${r}`">{{r}}</li>
@@ -38,7 +38,7 @@
                     mdi-handshake-outline
                 </v-icon>
             </template>
-            <span><v-icon color="white">mdi-handshake-outline</v-icon> Traits: {{model.traits.length}}</span>
+            <span><v-icon color="white">mdi-handshake-outline</v-icon> <strong>Traits:</strong> {{model.traits.length}}</span>
             <v-divider v-if="model.traits.length" />
             <ul>
                 <li v-for="(r, i) in model.traits" :key="`s_fot_${i}_${r}`">{{r}}</li>
@@ -50,10 +50,10 @@
                     mdi-format-text
                 </v-icon>
             </template>
-            <span><v-icon color="white">mdi-format-text</v-icon> Fields: {{model.fields.length}}</span>
-            <v-divider v-if="model.relations.length" />
+            <span><v-icon color="white">mdi-format-text</v-icon> <strong>Fields:</strong> {{model.fields.length}}</span>
+            <v-divider v-if="model.fields.length" />
             <ul>
-                <li v-for="(r, i) in model.fields" :key="`s_f_${i}_${r.id}`">{{r.name}}:{{r.type}} <small v-if="r.methods.nullable!==undefined">(nullable)</small></li>
+                <li v-for="(r, i) in model.fields" :key="`s_f_${i}_${r.id}`"><strong>{{r.name}}</strong>:{{r.type}} <small v-if="r.methods.nullable!==undefined">(nullable)</small></li>
             </ul>
         </v-tooltip>
         <v-tooltip bottom>
@@ -62,10 +62,10 @@
                     mdi-relation-zero-or-one-to-zero-or-one
                 </v-icon>
             </template>
-            <span><v-icon color="white">mdi-relation-zero-or-one-to-zero-or-one</v-icon> Relations: {{model.relations.length}}</span>
+            <span><v-icon color="white">mdi-relation-zero-or-one-to-zero-or-one</v-icon> <strong>Relations:</strong> {{model.relations.length}}</span>
             <v-divider v-if="model.relations.length" />
             <ul>
-                <li v-for="(r, i) in model.relations" :key="`s_m_${i}_${r.id}`">{{r.method ? r.method : r.model}}:{{r.type}} <small v-if="r.nullable">(nullable)</small></li>
+                <li v-for="(r, i) in model.relations" :key="`s_m_${i}_${r.id}`"><strong>{{r.method ? r.method : r.model}}</strong>:{{r.type}} <small v-if="r.nullable">(nullable)</small></li>
             </ul>
         </v-tooltip>
         <v-tooltip bottom>
@@ -74,10 +74,10 @@
                     mdi-factory
                 </v-icon>
             </template>
-            <span><v-icon color="white">mdi-factory</v-icon> Factory: {{model.factory_count ? model.factory_count : 'No'}}</span>
+            <span><v-icon color="white">mdi-factory</v-icon> <strong>Factory:</strong> {{model.factory_count ? model.factory_count : 'No'}}</span>
             <v-divider v-if="model.factory.length" />
             <ul>
-                <li v-for="(r, i) in model.factory" :key="`s_fof_${i}_${r.name}`">{{r.name}}: {{r.value}}</li>
+                <li v-for="(r, i) in model.factory" :key="`s_fof_${i}_${r.name}`"><strong>{{r.name}}</strong>: {{r.value}}</li>
             </ul>
         </v-tooltip>
         <v-tooltip bottom>
@@ -86,7 +86,7 @@
                     mdi-sprout-outline
                 </v-icon>
             </template>
-            <span><v-icon color="white">mdi-sprout-outline</v-icon> Seeds: {{model.seed.length}}</span>
+            <span><v-icon color="white">mdi-sprout-outline</v-icon> <strong>Seeds:</strong> {{model.seed.length}}</span>
         </v-tooltip>
     </span>
 </template>
