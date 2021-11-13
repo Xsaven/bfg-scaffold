@@ -1,45 +1,47 @@
 <template>
     <v-container>
-        <template v-for="(s,i) in seed">
-            <json-editor-element
-                v-model="seed[i]"
-                @change="changed"
-                :key="`constant_js_editor_${i}_${ok(s)}`"
-                title="Edit JSON of seed"
-                :defaults="fields"
-            />
-            <v-btn text :key="`constant_js_editor_del_${i}_${ok(s)}`" @click="drop(i)">
-                <v-icon>mdi-delete</v-icon>
-            </v-btn>
-            <v-divider :key="`constant_js_editor_d_del_${i}_${ok(s)}`" />
-        </template>
-        <v-fab-transition>
-            <v-btn
-                @click="$store.commit('addSeed')"
-                color="primary"
-                dark
-                fixed
-                bottom
-                right
-                fab
-            >
-                <v-icon>mdi-plus</v-icon>
-            </v-btn>
-        </v-fab-transition>
+        <div v-if="show">
+            <template v-for="(s,i) in seed">
+                <json-editor-element
+                    v-model="seed[i]"
+                    @change="changed"
+                    :key="`constant_js_editor_${i}`"
+                    title="Edit JSON of seed"
+                    :defaults="fields"
+                />
+                <v-btn text :key="`constant_js_editor_del_${i}`" @click="drop(i)">
+                    <v-icon>mdi-delete</v-icon>
+                </v-btn>
+                <v-divider :key="`constant_js_editor_d_del_${i}`" />
+            </template>
+            <v-fab-transition>
+                <v-btn
+                    @click="$store.commit('addSeed')"
+                    color="primary"
+                    dark
+                    fixed
+                    bottom
+                    right
+                    fab
+                >
+                    <v-icon>mdi-plus</v-icon>
+                </v-btn>
+            </v-fab-transition>
+        </div>
     </v-container>
 </template>
 
 <script>
 
 import JsonEditorElement from "../JsonEditor";
-const md5 = require('md5');
 
 export default {
     name: 'model-seeds',
     components: {JsonEditorElement},
     data () {
         return {
-
+            show: true,
+            time: 0
         }
     },
     watch: {
@@ -70,9 +72,13 @@ export default {
         drop (index) {
             this.seed = this.seed.filter((i,k) => k !== index);
             this.changed();
-        },
-        ok (d) {
-            return md5(JSON.stringify(d));
+            if (this.time) {
+                clearTimeout(this.time);
+            }
+            this.show = false;
+            this.time = setTimeout(() => {
+                this.show = true;
+            }, 100);
         }
     }
 }
