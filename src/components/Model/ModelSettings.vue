@@ -199,6 +199,7 @@
 
             <v-col cols="12">
                 <delete-model :model="model" />
+                <v-btn class="warning ml-5" @click="clone()"><v-icon>mdi-content-copy</v-icon> Clone {{ model.title }}</v-btn>
             </v-col>
         </v-row>
     </v-container>
@@ -301,6 +302,9 @@ export default {
     methods: {
         changed () {
             this.$store.commit('setModelOption', ['name', this.name]);
+        },
+        clone () {
+            this.$store.commit('cloneModel', this.$store.state.selected_model);
         }
     }
 }

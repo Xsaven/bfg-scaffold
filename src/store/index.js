@@ -119,7 +119,7 @@ export default new Vuex.Store({
       }
     },
     setSelectedModel (state, model_index) {
-      state.selected_model = model_index;
+      if (model_index || model_index === 0) state.selected_model = model_index;
     },
     setSelectedModelTab (state, tab_index) {
       state.model_tabs[state.selected_model] = tab_index;

@@ -14,7 +14,9 @@
                     <th class="text-left">
                         Type
                     </th>
-                    <th></th>
+                    <th>Nullable</th>
+                    <th>Cascade Update</th>
+                    <th>Cascade Delete</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -49,24 +51,22 @@
                             ></v-autocomplete>
                         </td>
                         <td>
-                            <v-tooltip bottom>
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-icon v-bind="attrs" v-on="on" :class="{'green--text': item.nullable, 'red--text': !item.nullable}">mdi-circle-off-outline</v-icon>
-                                </template>
-                                <span>Nullable: {{item.nullable}}</span>
-                            </v-tooltip>
-                            <v-tooltip bottom>
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-icon v-bind="attrs" v-on="on" :class="{'green--text': item.cascade_update, 'red--text': !item.cascade_update}">mdi-update</v-icon>
-                                </template>
-                                <span>Cascade update: {{item.cascade_update}}</span>
-                            </v-tooltip>
-                            <v-tooltip bottom>
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-icon v-bind="attrs" v-on="on" :class="{'green--text': item.cascade_delete, 'red--text': !item.cascade_delete}">mdi-delete-circle</v-icon>
-                                </template>
-                                <span>Cascade delete: {{item.cascade_delete}}</span>
-                            </v-tooltip>
+                            <v-checkbox
+                                v-model="item.nullable"
+                                @change="changed"
+                            ></v-checkbox>
+                        </td>
+                        <td>
+                            <v-checkbox
+                                v-model="item.cascade_update"
+                                @change="changed"
+                            ></v-checkbox>
+                        </td>
+                        <td>
+                            <v-checkbox
+                                v-model="item.cascade_delete"
+                                @change="changed"
+                            ></v-checkbox>
                         </td>
                         <td>
                             <relation-editor :item.sync="item" :key="`${model.id}_edit_relation_${i}_${item.id}`" :changed="changed" />

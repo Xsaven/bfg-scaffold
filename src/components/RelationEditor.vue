@@ -19,29 +19,29 @@
             </v-toolbar>
             <v-card-text>
                 <br>
-                <v-row>
-                    <v-col cols="4">
-                        <v-checkbox
-                            v-model="item.nullable"
-                            label="Nullable"
-                            @change="changed"
-                        ></v-checkbox>
-                    </v-col>
-                    <v-col cols="4">
-                        <v-checkbox
-                            v-model="item.cascade_update"
-                            label='Cascade update'
-                            @change="changed"
-                        ></v-checkbox>
-                    </v-col>
-                    <v-col cols="4">
-                        <v-checkbox
-                            v-model="item.cascade_delete"
-                            label='Cascade delete'
-                            @change="changed"
-                        ></v-checkbox>
-                    </v-col>
-                </v-row>
+<!--                <v-row>-->
+<!--                    <v-col cols="4">-->
+<!--                        <v-checkbox-->
+<!--                            v-model="item.nullable"-->
+<!--                            label="Nullable"-->
+<!--                            @change="changed"-->
+<!--                        ></v-checkbox>-->
+<!--                    </v-col>-->
+<!--                    <v-col cols="4">-->
+<!--                        <v-checkbox-->
+<!--                            v-model="item.cascade_update"-->
+<!--                            label='Cascade update'-->
+<!--                            @change="changed"-->
+<!--                        ></v-checkbox>-->
+<!--                    </v-col>-->
+<!--                    <v-col cols="4">-->
+<!--                        <v-checkbox-->
+<!--                            v-model="item.cascade_delete"-->
+<!--                            label='Cascade delete'-->
+<!--                            @change="changed"-->
+<!--                        ></v-checkbox>-->
+<!--                    </v-col>-->
+<!--                </v-row>-->
                 <v-row align="center">
                     <v-checkbox
                         v-model="enter_method"
