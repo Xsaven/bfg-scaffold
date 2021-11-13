@@ -51,11 +51,25 @@
             </v-col>
             <v-col cols="6">
                 <v-checkbox
-                    v-model="order.on"
-                    label='Manual distribution of the model of adding a model'
-                    @change="changed"
+                    v-model="must_verify"
+                    label="Verification of an authorized user according to EMAIL."
+                    :disabled="!auth"
                 ></v-checkbox>
             </v-col>
+            <v-col cols="12">
+                <v-text-field
+                    label="Foreign field of model"
+                    v-model="foreign"
+                    hide-details="auto"
+                ></v-text-field>
+            </v-col>
+<!--            <v-col cols="6">-->
+<!--                <v-checkbox-->
+<!--                    v-model="order.on"-->
+<!--                    label='Manual distribution of the model of adding a model (Order)'-->
+<!--                    @change="changed"-->
+<!--                ></v-checkbox>-->
+<!--            </v-col>-->
         </v-row>
         <v-row>
             <v-col cols="6">
@@ -69,13 +83,6 @@
                 <v-text-field
                     label="Namespace of model"
                     v-model="namespace"
-                    hide-details="auto"
-                ></v-text-field>
-            </v-col>
-            <v-col cols="12">
-                <v-text-field
-                    label="Foreign field of model"
-                    v-model="foreign"
                     hide-details="auto"
                 ></v-text-field>
             </v-col>
@@ -225,6 +232,10 @@ export default {
         auth: {
             get () { return this.$store.getters.model.auth; },
             set (val) {this.$store.commit('setModelOption', ['auth', val])},
+        },
+        must_verify: {
+            get () { return this.$store.getters.model.must_verify; },
+            set (val) {this.$store.commit('setModelOption', ['must_verify', val])},
         },
         observers: {
             get () { return this.$store.getters.model.observers; },

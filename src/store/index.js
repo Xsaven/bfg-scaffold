@@ -40,6 +40,7 @@ export default new Vuex.Store({
         model.inherited_field = null;
         model.morph_field = null;
         model.auth = false;
+        model.must_verify = false;
         model.path = 'app/Models';
         model.namespace = 'App\\Models';
         model.foreign = 'id';

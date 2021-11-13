@@ -24,6 +24,9 @@ export class ScaffoldConvertor {
     setAuth (model) {
         if (model.auth) {
             this.items[model.name].auth = true;
+            if (model.must_verify) {
+                this.items[model.name].must_verify = true;
+            }
         }
         return this;
     }
