@@ -126,7 +126,7 @@ export default new Vuex.Store({
     },
     setScaffold (state, scaffold) {
       if (Array.isArray(scaffold)) {
-        state.scaffold = scaffold;
+        state.scaffold = Object.assign([], scaffold);
       }
     },
     setSelectedModel (state, model_index) {

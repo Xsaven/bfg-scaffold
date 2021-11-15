@@ -3,9 +3,9 @@
         <v-row class="pa-4" justify="space-between">
             <v-col cols="3" style="height: calc(100vh - 84px);overflow-x: hidden">
                 <v-list shaped>
-                    <v-list-item-group v-model="active" color="primary">
-                        <draggable v-model="items">
-                            <v-list-item v-for="(item, i) in items" :key="`${item.id}_${i}`">
+                    <v-list-item-group color="primary">
+                        <draggable :list="items">
+                            <v-list-item v-for="(item, i) in items" :key="`${item.id}_${i}`" @click="active = i" :class="{'v-list-item--active': active === i}">
                                 <v-list-item-icon @click="se(8)">
                                     <v-icon>mdi-cube-outline</v-icon>
                                 </v-list-item-icon>
