@@ -32,28 +32,48 @@
         </v-tab>
 
         <v-tab-item :transition="false">
-            <h2>Model settings</h2>
+            <v-row>
+                <v-col cols="6"><h2>Model settings</h2></v-col>
+                <v-col cols="6" class="text-right">
+                    <h3>{{model.title}}</h3>
+                </v-col>
+            </v-row>
             <v-divider></v-divider>
             <v-card v-if="model_tab===0" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-settings :key="`selected_edit_settings__${model.id}`" />
             </v-card>
         </v-tab-item>
         <v-tab-item :transition="false">
-            <h2>Fields</h2>
+            <v-row>
+                <v-col cols="6"><h2>Fields</h2></v-col>
+                <v-col cols="6" class="text-right">
+                    <h3>{{model.title}}</h3>
+                </v-col>
+            </v-row>
             <v-divider></v-divider>
             <v-card v-if="model_tab===1" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-fields :key="`selected_edit_fields_${model.id}`" />
             </v-card>
         </v-tab-item>
         <v-tab-item :transition="false">
-            <h2>Relations</h2>
+            <v-row>
+                <v-col cols="6"><h2>Relations</h2></v-col>
+                <v-col cols="6" class="text-right">
+                    <h3>{{model.title}}</h3>
+                </v-col>
+            </v-row>
             <v-divider></v-divider>
             <v-card v-if="model_tab===2" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-relations :key="`selected_edit_relations_${model.id}`" />
             </v-card>
         </v-tab-item>
         <v-tab-item :transition="false">
-            <h2>Constants / Properties</h2>
+            <v-row>
+                <v-col cols="6"><h2>Constants / Properties</h2></v-col>
+                <v-col cols="6" class="text-right">
+                    <h3>{{model.title}}</h3>
+                </v-col>
+            </v-row>
             <v-divider></v-divider>
             <v-card v-if="model_tab===3" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-constants :key="`selected_edit_constants_${model.id}`" />
@@ -62,42 +82,72 @@
             </v-card>
         </v-tab-item>
         <v-tab-item :transition="false">
-            <h2>Rules</h2>
+            <v-row>
+                <v-col cols="6"><h2>Rules</h2></v-col>
+                <v-col cols="6" class="text-right">
+                    <h3>{{model.title}}</h3>
+                </v-col>
+            </v-row>
             <v-divider></v-divider>
             <v-card v-if="model_tab===4" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-rules :key="`selected_edit_rules_${model.id}`" />
             </v-card>
         </v-tab-item>
         <v-tab-item :transition="false">
-            <h2>Factories</h2>
+            <v-row>
+                <v-col cols="6"><h2>Factories</h2></v-col>
+                <v-col cols="6" class="text-right">
+                    <h3>{{model.title}}</h3>
+                </v-col>
+            </v-row>
             <v-divider></v-divider>
             <v-card v-if="model_tab===5" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-factories :key="`selected_edit_factories_${model.id}`" />
             </v-card>
         </v-tab-item>
         <v-tab-item :transition="false">
-            <h2>Seeds</h2>
+            <v-row>
+                <v-col cols="6"><h2>Seeds</h2></v-col>
+                <v-col cols="6" class="text-right">
+                    <h3>{{model.title}}</h3>
+                </v-col>
+            </v-row>
             <v-divider></v-divider>
             <v-card v-if="model_tab===6" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-seeds :key="`selected_edit_seeds_${model.id}`" />
             </v-card>
         </v-tab-item>
         <v-tab-item :transition="false">
-            <h2>Information</h2>
+            <v-row>
+                <v-col cols="6"><h2>Information</h2></v-col>
+                <v-col cols="6" class="text-right">
+                    <h3>{{model.title}}</h3>
+                </v-col>
+            </v-row>
             <v-divider></v-divider>
             <v-card v-if="model_tab===7" flat style="height: calc(100vh - 145px);overflow-x: hidden" class="container_statistic">
                 <model-statistic :key="`selected_edit_statistic_${model.id}`" />
             </v-card>
         </v-tab-item>
         <v-tab-item :transition="false">
-            <h2>Console</h2>
+            <v-row>
+                <v-col cols="6"><h2>Console</h2></v-col>
+                <v-col cols="6" class="text-right">
+                    <h3>{{model.title}}</h3>
+                </v-col>
+            </v-row>
             <v-divider></v-divider>
             <v-card v-if="model_tab===8" flat style="height: calc(100vh - 145px);overflow-x: hidden" class="container_statistic">
                 <model-commands :key="`selected_edit_commands_${model.id}`" />
             </v-card>
         </v-tab-item>
         <v-tab-item :transition="false">
-            <h2>File watcher</h2>
+            <v-row>
+                <v-col cols="6"><h2>File watcher</h2></v-col>
+                <v-col cols="6" class="text-right">
+                    <h3>{{model.title}}</h3>
+                </v-col>
+            </v-row>
             <v-divider></v-divider>
             <v-card v-if="model_tab===9" flat style="height: calc(100vh - 145px);overflow-x: hidden" class="container_statistic">
                 <file-watch :key="`selected_edit_file_watch_${model.id}`" />

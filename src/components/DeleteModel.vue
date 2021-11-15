@@ -6,7 +6,7 @@
     >
         <template v-slot:activator="{ on, attrs }">
             <v-btn color="error" v-bind="attrs" v-on="on" @click.prevent.stop="dialog = true">
-                <v-icon>mdi-delete</v-icon> Delete model
+                <v-icon>mdi-delete</v-icon> Delete {{ model.title }}
             </v-btn>
         </template>
         <v-card>

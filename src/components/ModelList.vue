@@ -20,16 +20,6 @@
                                         </v-row>
                                     </v-list-item-subtitle>
                                 </v-list-item-content>
-<!--                                <v-list-item-action>-->
-<!--                                    <v-tooltip bottom>-->
-<!--                                        <template v-slot:activator="{ on, attrs }">-->
-<!--                                            <v-btn text v-bind="attrs" v-on="on" @click="clone(i)">-->
-<!--                                                <v-icon>mdi-content-copy</v-icon>-->
-<!--                                            </v-btn>-->
-<!--                                        </template>-->
-<!--                                        <span>Clone {{ item.title }}</span>-->
-<!--                                    </v-tooltip>-->
-<!--                                </v-list-item-action>-->
                             </v-list-item>
                         </draggable>
                     </v-list-item-group>
