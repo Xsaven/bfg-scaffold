@@ -71,15 +71,12 @@
 
             </template>
         </v-simple-table>
+        <br>
         <v-fab-transition>
             <v-btn
                 @click="$store.commit('addFactory')"
                 color="primary"
                 dark
-                fixed
-                bottom
-                right
-                fab
             >
                 <v-icon>mdi-plus</v-icon>
             </v-btn>

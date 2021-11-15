@@ -12,22 +12,18 @@
                 <v-btn text :key="`constant_js_editor_del_${i}`" @click="drop(i)">
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>
-<!--                <v-divider :key="`constant_js_editor_d_del_${i}`" />-->
             </template>
-            <v-fab-transition>
-                <v-btn
-                    @click="$store.commit('addSeed')"
-                    color="primary"
-                    dark
-                    fixed
-                    bottom
-                    right
-                    fab
-                >
-                    <v-icon>mdi-plus</v-icon>
-                </v-btn>
-            </v-fab-transition>
         </div>
+        <br>
+        <v-fab-transition>
+            <v-btn
+                @click="$store.commit('addSeed')"
+                color="primary"
+                dark
+            >
+                <v-icon>mdi-plus</v-icon>
+            </v-btn>
+        </v-fab-transition>
     </v-container>
 </template>
 

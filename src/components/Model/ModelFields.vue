@@ -34,7 +34,13 @@
                         </v-tooltip>
                     </td>
                     <td>
-                        <v-text-field v-model="item.name" @change="changed"></v-text-field>
+                        <v-autocomplete
+                            v-model="item.name"
+                            @change="changed"
+                            @keyup="changed"
+                            :search-input.sync="item.name"
+                            :items="[...[item.name ? item.name : ''], ...fieldNames]"
+                        ></v-autocomplete>
                     </td>
                     <td>
                         <v-autocomplete
@@ -80,15 +86,12 @@
 
             </template>
         </v-simple-table>
+        <br>
         <v-fab-transition>
             <v-btn
                 @click="$store.commit('addField')"
                 color="primary"
                 dark
-                fixed
-                bottom
-                right
-                fab
             >
                 <v-icon>mdi-plus</v-icon>
             </v-btn>
@@ -104,12 +107,7 @@ export default {
     data () {
         return {
             field_types: require('../../store/field_types'),
-            default_methods: {
-                nullable: [], default: "", comment: "", cast: "", after: "", always: [], autoIncrement: [],
-                charset: "", collation: [], constrained: [], first: [], index: [], persisted: [], primary: [],
-                spatialIndex: [], storedAs: "", type: "", unique: [], unsigned: [], useCurrent: [],
-                useCurrentOnUpdate: [], virtualAs: [], cascadeOnDelete: [], cascadeOnUpdate: [],
-            }
+            default_methods: require('../../store/default_methods')
         }
     },
     watch: {
@@ -126,6 +124,13 @@ export default {
         active: {
             get () {return this.$store.state.selected_model},
             set (value) {this.$store.commit('setSelectedModel', value)},
+        },
+        fieldNames () {
+            let fi = [];
+            this.$store.state.scaffold.map((f) => {
+                f.fields.map(i => fi.push(i.name))
+            });
+            return fi.filter((item, pos) => fi.indexOf(item) === pos)
         }
     },
     methods: {

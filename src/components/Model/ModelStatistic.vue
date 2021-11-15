@@ -51,45 +51,55 @@
                 </v-simple-table>
             </v-col>
         </v-row>
-        <v-divider></v-divider>
-        <v-subheader>The last child process log</v-subheader>
-        <v-container fluid>
-            <v-row>
-                <v-col>
-                    <template v-for="(s,k) in last_child_report">
-                        <pre :key="`lcp_${k}`">{{s}}</pre>
+        <v-row>
+            <v-col>
+                <v-simple-table dense>
+                    <template v-slot:default>
+                        <tbody class="text-left">
+                            <template v-for="line in lines">
+                                <tr :key="`env_line_${line.name}`">
+                                    <td>{{line.name}}</td>
+                                    <td>{{line.value}}</td>
+                                </tr>
+                            </template>
+                        </tbody>
                     </template>
-                </v-col>
-            </v-row>
-        </v-container>
+                </v-simple-table>
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 
 <script>
+const fs = new (require('../../plugins/fs'));
 export default {
     name: 'model-statistic',
     data () {
         return {
-            t: 0
+            lines: []
         }
     },
-    watch: {
-        last_child_report () {
-            if (this.t) clearTimeout(this.t);
-            this.t = setTimeout(() => document.querySelector('.container_statistic').scrollTop = 999999999999999999999999, 100)
-        }
-    },
+
     computed: {
         model () {
             return this.$store.getters.model
         },
-        last_child_report: {
-            get () { return this.$store.state.last_child_report; },
-            set (val) { this.$store.commit('setLastChildReport', val); }
-        }
+    },
+    mounted() {
+        this.updEnv();
     },
     methods: {
-
+        updEnv () {
+            this.lines = [];
+            fs.get_contents(window.root_dir + '/.env').split("\n").map((i) => {
+                if (i) {
+                    let m = /([A-Za-z0-9\-_]+)=(.*)/.exec(i);
+                    if (m && m[1] && m[2]) {
+                        this.lines.push({name: m[1], value: m[2]});
+                    }
+                }
+            });
+        }
     }
 }
 </script>

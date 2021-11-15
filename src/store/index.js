@@ -13,12 +13,15 @@ export default new Vuex.Store({
     total: 0,
     selected_model: null,
     scaffold: [],
+    model_tab: 0,
     model_tabs: {},
     commands: {
       rebuild: ['php artisan scaffold -f'],
       fresh: ['php artisan scaffold -f', 'php artisan migrate:fresh --seed', 'composer dump-autoload'],
     },
-    last_child_report: []
+    last_child_report: [],
+    cmd: '',
+    watches: []
   },
   mutations: {
     addModel (state, model) {
@@ -104,6 +107,14 @@ export default new Vuex.Store({
       rule.value = [];
       state.scaffold[state.selected_model].rule.push(rule);
     },
+    addWatch (state, watch = {}) {
+      watch.id = Math.floor(Math.random() * 999999999);
+      watch.file = '*';
+      watch.event = 'all';
+      watch.touch = 0;
+      watch.commands = [];
+      state.watches.push(watch);
+    },
     addFactory (state, factory = {}) {
       factory.id = Math.floor(Math.random() * 999999999);
       factory.name = '';
@@ -122,7 +133,11 @@ export default new Vuex.Store({
       if (model_index || model_index === 0) state.selected_model = model_index;
     },
     setSelectedModelTab (state, tab_index) {
-      state.model_tabs[state.selected_model] = tab_index;
+      // if (localStorage.getItem('tab-pin') !== '1') {
+      //   state.model_tabs[state.selected_model] = tab_index;
+      // } else {
+      // }
+        state.model_tab = tab_index;
     },
     deleteModel (state, model_id) {
       state.scaffold = state.scaffold.filter((i,k) => {
@@ -135,6 +150,14 @@ export default new Vuex.Store({
     },
     setState (state, prop) {
       state[prop[0]] = prop[1];
+    },
+    setCmd (state, cmd) {
+      state.cmd = String(cmd).replace(/{model}/g, window.camel(state.scaffold[state.selected_model].name, true))
+          .replace(/{name}/g, state.scaffold[state.selected_model].name)
+          .replace(/{path}/g, state.scaffold[state.selected_model].path)
+          .replace(/{namespace}/g, state.scaffold[state.selected_model].namespace)
+          .replace(/{foreign}/g, state.scaffold[state.selected_model].foreign)
+          .replace(/{id}/g, state.scaffold[state.selected_model].id)
     },
     cloneModel (state, index) {
       const model = Object.assign({}, state.scaffold[index]);
@@ -155,7 +178,8 @@ export default new Vuex.Store({
       return state.scaffold[state.selected_model];
     },
     model_tab (state) {
-      return state.model_tabs[state.selected_model];
+      // return localStorage.getItem('tab-pin') !== '1' ? state.model_tabs[state.selected_model] : state.model_tab;
+      return state.model_tab;
     }
   },
   actions: {

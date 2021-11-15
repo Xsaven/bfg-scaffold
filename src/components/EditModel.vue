@@ -1,78 +1,106 @@
 <template>
-    <v-tabs show-arrows v-model="model_tab">
+    <v-tabs show-arrows v-model="model_tab" vertical centered slider-size="2" center-active>
         <v-tab>
-            <v-icon left>mdi-cogs</v-icon> Model
+            <edit-model-tab icon="cogs" name="Model settings" />
         </v-tab>
         <v-tab>
-            <v-icon left>mdi-format-text</v-icon> Fields
+            <edit-model-tab icon="format-text" name="Fields" />
         </v-tab>
         <v-tab>
-            <v-icon left>mdi-relation-zero-or-one-to-zero-or-one</v-icon> Relations
+            <edit-model-tab icon="relation-zero-or-one-to-zero-or-one" name="Relations" />
         </v-tab>
         <v-tab>
-            <v-icon left>mdi-cube-unfolded</v-icon> Constants / Properties
+            <edit-model-tab icon="cube-unfolded" name="Constants / Properties" />
         </v-tab>
         <v-tab>
-            <v-icon left>mdi-pencil-ruler</v-icon> Rules
+            <edit-model-tab icon="pencil-ruler" name="Rules" />
         </v-tab>
         <v-tab>
-            <v-icon left>mdi-factory</v-icon> Factory
+            <edit-model-tab icon="factory" name="Factory" />
         </v-tab>
         <v-tab>
-            <v-icon left>mdi-sprout-outline</v-icon> Seeds
+            <edit-model-tab icon="sprout-outline" name="Seeds" />
         </v-tab>
         <v-tab>
-            <v-icon left>mdi-chart-bell-curve</v-icon> Statistic
+            <edit-model-tab icon="chart-bell-curve" name="Information" />
+        </v-tab>
+        <v-tab>
+            <edit-model-tab icon="console-line" name="Console" />
+        </v-tab>
+        <v-tab>
+            <edit-model-tab icon="file-eye-outline" name="File watcher" />
         </v-tab>
 
-        <v-tab-item style="height: calc(100vh - 156px);overflow-x: hidden">
-            <v-card flat>
-                <br>
+        <v-tab-item :transition="false">
+            <h2>Model settings</h2>
+            <v-divider></v-divider>
+            <v-card v-if="model_tab===0" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-settings :key="`selected_edit_settings__${model.id}`" />
             </v-card>
         </v-tab-item>
-        <v-tab-item style="height: calc(100vh - 156px);overflow-x: hidden">
-            <v-card flat>
-                <br>
+        <v-tab-item :transition="false">
+            <h2>Fields</h2>
+            <v-divider></v-divider>
+            <v-card v-if="model_tab===1" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-fields :key="`selected_edit_fields_${model.id}`" />
             </v-card>
         </v-tab-item>
-        <v-tab-item style="height: calc(100vh - 156px);overflow-x: hidden">
-            <v-card flat>
-                <br>
+        <v-tab-item :transition="false">
+            <h2>Relations</h2>
+            <v-divider></v-divider>
+            <v-card v-if="model_tab===2" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-relations :key="`selected_edit_relations_${model.id}`" />
             </v-card>
         </v-tab-item>
-        <v-tab-item style="height: calc(100vh - 156px);overflow-x: hidden">
-            <v-card flat>
-                <br>
+        <v-tab-item :transition="false">
+            <h2>Constants / Properties</h2>
+            <v-divider></v-divider>
+            <v-card v-if="model_tab===3" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-constants :key="`selected_edit_constants_${model.id}`" />
                 <v-divider />
                 <model-properties :key="`selected_edit_properties_${model.id}`" />
             </v-card>
         </v-tab-item>
-        <v-tab-item style="height: calc(100vh - 156px);overflow-x: hidden">
-            <v-card flat>
-                <br>
+        <v-tab-item :transition="false">
+            <h2>Rules</h2>
+            <v-divider></v-divider>
+            <v-card v-if="model_tab===4" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-rules :key="`selected_edit_rules_${model.id}`" />
             </v-card>
         </v-tab-item>
-        <v-tab-item style="height: calc(100vh - 156px);overflow-x: hidden">
-            <v-card flat>
-                <br>
+        <v-tab-item :transition="false">
+            <h2>Factories</h2>
+            <v-divider></v-divider>
+            <v-card v-if="model_tab===5" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-factories :key="`selected_edit_factories_${model.id}`" />
             </v-card>
         </v-tab-item>
-        <v-tab-item style="height: calc(100vh - 156px);overflow-x: hidden">
-            <v-card flat>
-                <br>
+        <v-tab-item :transition="false">
+            <h2>Seeds</h2>
+            <v-divider></v-divider>
+            <v-card v-if="model_tab===6" flat style="height: calc(100vh - 145px);overflow-x: hidden">
                 <model-seeds :key="`selected_edit_seeds_${model.id}`" />
             </v-card>
         </v-tab-item>
-        <v-tab-item style="height: calc(100vh - 156px);overflow-x: hidden" class="container_statistic">
-            <v-card flat>
-                <br>
+        <v-tab-item :transition="false">
+            <h2>Information</h2>
+            <v-divider></v-divider>
+            <v-card v-if="model_tab===7" flat style="height: calc(100vh - 145px);overflow-x: hidden" class="container_statistic">
                 <model-statistic :key="`selected_edit_statistic_${model.id}`" />
+            </v-card>
+        </v-tab-item>
+        <v-tab-item :transition="false">
+            <h2>Console</h2>
+            <v-divider></v-divider>
+            <v-card v-if="model_tab===8" flat style="height: calc(100vh - 145px);overflow-x: hidden" class="container_statistic">
+                <model-commands :key="`selected_edit_commands_${model.id}`" />
+            </v-card>
+        </v-tab-item>
+        <v-tab-item :transition="false">
+            <h2>File watcher</h2>
+            <v-divider></v-divider>
+            <v-card v-if="model_tab===9" flat style="height: calc(100vh - 145px);overflow-x: hidden" class="container_statistic">
+                <file-watch :key="`selected_edit_file_watch_${model.id}`" />
             </v-card>
         </v-tab-item>
     </v-tabs>
@@ -88,9 +116,15 @@ import ModelProperties from "./Model/ModelProperties";
 import ModelRules from "./Model/ModelRules";
 import ModelFactories from "./Model/ModelFactories";
 import ModelSeeds from "./Model/ModelSeeds";
+import ModelCommands from "./Model/ModelCommands";
+import EditModelTab from "./EditModelTab";
+import FileWatch from "./Model/FileWatch";
 export default {
     name: 'edit-model',
     components: {
+        FileWatch,
+        EditModelTab,
+        ModelCommands,
         ModelSeeds,
         ModelFactories,
         ModelRules, ModelProperties, ModelConstants, ModelRelations, ModelStatistic, ModelFields, ModelSettings},

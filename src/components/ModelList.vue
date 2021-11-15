@@ -6,7 +6,7 @@
                     <v-list-item-group v-model="active" color="primary">
                         <draggable v-model="items">
                             <v-list-item v-for="(item, i) in items" :key="`${item.id}_${i}`">
-                                <v-list-item-icon>
+                                <v-list-item-icon @click="se(8)">
                                     <v-icon>mdi-cube-outline</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
@@ -83,6 +83,9 @@ export default {
     methods: {
         clone (index) {
             this.$store.commit('cloneModel', index);
+        },
+        se (i) {
+            this.$store.commit('setSelectedModelTab', i);
         }
     },
 }

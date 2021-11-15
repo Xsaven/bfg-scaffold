@@ -1,8 +1,9 @@
 module.exports = [
-    'bigIncrements', 'bigInteger', 'binary', 'boolean', 'char', 'dateTimeTz', 'dateTime', 'date',
-    'decimal', 'double', 'enum', 'float', 'foreignId', 'increments', 'integer', 'ipAddress', 'json',
+    'string', 'boolean', 'double', 'integer', 'json', 'text', 'timestamp', 'bigIncrements',
+    'bigInteger', 'binary', 'char', 'dateTimeTz', 'dateTime', 'date',
+    'decimal', 'enum', 'float', 'foreignId', 'increments', 'ipAddress',
     'jsonb', 'lineString', 'longText', 'macAddress', 'mediumIncrements', 'mediumInteger', 'mediumText',
-    'multiLineString', 'set', 'smallIncrements', 'smallInteger', 'string', 'text', 'timestampTz',
-    'timestamp', 'tinyIncrements', 'tinyInteger', 'tinyText', 'unsignedBigInteger', 'unsignedDecimal',
+    'multiLineString', 'set', 'smallIncrements', 'smallInteger', 'timestampTz',
+    'tinyIncrements', 'tinyInteger', 'tinyText', 'unsignedBigInteger', 'unsignedDecimal',
     'unsignedInteger', 'unsignedMediumInteger', 'unsignedSmallInteger', 'unsignedTinyInteger', 'year',
 ];

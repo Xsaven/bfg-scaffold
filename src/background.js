@@ -19,7 +19,11 @@ function openDir () {
   }).then(result => {
     if (result.canceled) return app.quit();
     else {
-      return result.filePaths;
+      let dir = result.filePaths[0];
+      if (fs.existsSync(path.join(dir, '.env'))) {
+        return [dir];
+      }
+      return openDir()
     }
   }).catch(() => {
     return openDir()

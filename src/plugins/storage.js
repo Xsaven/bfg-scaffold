@@ -17,20 +17,23 @@ export default class Storage {
         if (timer) { clearTimeout(timer); }
         timer = setTimeout(() => {
 
-            let old = localStorage.getItem('old-hash');
+            let oldHash = localStorage.getItem('old-hash');
+            let oldHash2 = localStorage.getItem('old-hash-2');
 
             let newData = JSON.stringify((new ScaffoldConvertor(value)).items, null, ' ');
+            let newHash1 = md5(newData);
+            let newHash2 = md5(value);
 
-            fs.put_contents(this.file_scaffold, newData);
-
-            newData = md5(newData);
-
-            if (old !== newData) {
+            if (oldHash !== newHash1) {
                 if (window.app) window.app.changed = true;
-                localStorage.setItem('old-hash', newData);
+                localStorage.setItem('old-hash', newHash1);
+                fs.put_contents(this.file_scaffold, newData);
             }
 
-            fs.put_contents(this.file, value);
+            if (oldHash2 !== newHash2) {
+                localStorage.setItem('old-hash-2', newHash2);
+                fs.put_contents(this.file, value);
+            }
 
         }, 150);
         return 1;

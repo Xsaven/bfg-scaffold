@@ -108,7 +108,6 @@ export default {
     },
     methods: {
         se (i) {
-            this.$store.commit('setSelectedModel', this.selected);
             this.$store.commit('setSelectedModelTab', i);
         }
     }

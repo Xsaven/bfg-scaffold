@@ -57,10 +57,8 @@ export default {
     },
     methods: {
         async fresh () {
-            this.loading = true;
-            this.dialog = true;
-            await window.child.exec(this.cmd);
             this.dialog = false;
+            await window.cmd.set(this.cmd, 1);
             if (window.app) window.app.changed = false;
         }
     }
