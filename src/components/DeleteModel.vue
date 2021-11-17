@@ -2,12 +2,17 @@
     <v-dialog
         v-model="dialog"
         persistent
-        max-width="290px"
+        width="490px"
     >
         <template v-slot:activator="{ on, attrs }">
-            <v-btn color="error" v-bind="attrs" v-on="on" @click.prevent.stop="dialog = true">
-                <v-icon>mdi-delete</v-icon> Delete {{ model.title }}
-            </v-btn>
+            <v-tooltip bottom v-bind="attrs" v-on="on">
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn text v-bind="attrs" v-on="on" @click="dialog = true;">
+                        <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                </template>
+                <span>Delete</span>
+            </v-tooltip>
         </template>
         <v-card>
             <v-card-title>Delete [{{model.title}}]?</v-card-title>

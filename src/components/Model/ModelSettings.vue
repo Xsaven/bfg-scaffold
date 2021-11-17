@@ -196,20 +196,14 @@
                     :disabled="!order.on"
                 ></v-text-field>
             </v-col>
-
-            <v-col cols="12">
-                <delete-model :model="model" />
-                <v-btn class="warning ml-5" @click="clone()"><v-icon>mdi-content-copy</v-icon> Clone {{ model.title }}</v-btn>
-            </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script>
-import DeleteModel from "../DeleteModel";
+
 export default {
     name: 'model-settings',
-    components: {DeleteModel},
     data () {
         return {
             relation_types: require('../../store/relation_types'),
@@ -302,9 +296,6 @@ export default {
     methods: {
         changed () {
             this.$store.commit('setModelOption', ['name', this.name]);
-        },
-        clone () {
-            this.$store.commit('cloneModel', this.$store.state.selected_model);
         }
     }
 }

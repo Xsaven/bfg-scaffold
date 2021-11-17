@@ -1,27 +1,26 @@
 <template>
     <v-dialog
         v-model="dialog"
-        :persistent="loading && dialog"
-        max-width="490px"
+        width="490px"
     >
         <template v-slot:activator="{ on, attrs }">
             <v-tooltip bottom v-bind="attrs" v-on="on">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn text v-bind="attrs" v-on="on" @click="dialog = true; loading = false" @click.meta="run">
-                        <v-icon>mdi-console</v-icon>
+                    <v-btn text v-bind="attrs" v-on="on" @click="open" @click.meta="run">
+                        <v-icon v-if="!loading">mdi-console</v-icon>
+                        <v-progress-circular
+                            v-else
+                            :size="22"
+                            :width="3"
+                            color="green"
+                            indeterminate
+                        ></v-progress-circular>
                     </v-btn>
                 </template>
                 <span>Run{{cmd ? ": " : ""}}{{cmd}}</span>
             </v-tooltip>
         </template>
-        <v-progress-linear
-            v-if="loading"
-            color="deep-purple accent-4"
-            indeterminate
-            rounded
-            height="6"
-        ></v-progress-linear>
-        <v-card v-else>
+        <v-card>
             <v-card-title>Run</v-card-title>
             <v-card-text><v-text-field v-model="cmd" label="Command" @keyup.enter="run" ref="d" /></v-card-text>
             <v-card-actions>
@@ -73,12 +72,17 @@ export default {
         }
     },
     methods: {
+        open () {
+            if (!this.loading) {
+                this.dialog = true;
+            }
+        },
         async run () {
             if (this.cmd) {
                 this.loading = true;
-                this.dialog = true;
-                await window.child.exec(this.cmd);
                 this.dialog = false;
+                await window.child.exec(this.cmd);
+                this.loading = false;
             }
         },
         async set (cmd, run = false) {

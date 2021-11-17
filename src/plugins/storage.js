@@ -20,19 +20,29 @@ export default class Storage {
             let oldHash = localStorage.getItem('old-hash');
             let oldHash2 = localStorage.getItem('old-hash-2');
 
-            let newData = JSON.stringify((new ScaffoldConvertor(value)).items, null, ' ');
-            let newHash1 = md5(newData);
             let newHash2 = md5(value);
 
+            value = JSON.parse(value)
+
+            let scaffold = Object.assign([], value.scaffold);
+            //delete value.scaffold;
+
+            let newData = JSON.stringify((new ScaffoldConvertor(scaffold)).items, null, ' ');
+            let newHash1 = md5(JSON.stringify(scaffold));
+
             if (oldHash !== newHash1) {
-                if (window.app) window.app.changed = true;
+                if (window.app) {
+                    window.app.changed = true;
+                    window.app.project_hash = newHash1;
+                }
                 localStorage.setItem('old-hash', newHash1);
                 fs.put_contents(this.file_scaffold, newData);
+                window.project_online.events.push({UpdateProjectScaffolds: [newHash1, scaffold]})
             }
 
             if (oldHash2 !== newHash2) {
                 localStorage.setItem('old-hash-2', newHash2);
-                fs.put_contents(this.file, value);
+                fs.put_contents(this.file, JSON.stringify(value));
             }
 
         }, 150);

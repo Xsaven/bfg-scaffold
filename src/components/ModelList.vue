@@ -3,8 +3,15 @@
         <v-row class="pa-4" justify="space-between">
             <v-col cols="3" style="height: calc(100vh - 84px);overflow-x: hidden">
                 <v-list shaped>
+                    <v-row>
+                        <v-col cols="6"><h3>Models</h3></v-col>
+                        <v-col cols="6" class="text-right">
+                            <add-model></add-model>
+                            <reset-scaffold></reset-scaffold>
+                        </v-col>
+                    </v-row>
                     <v-list-item-group color="primary">
-                        <draggable :list="items">
+                        <draggable :list="items" @change="upd">
                             <v-list-item v-for="(item, i) in items" :key="`${item.id}_${i}`" @click="active = i" :class="{'v-list-item--active': active === i}">
                                 <v-list-item-icon @click="se(8)">
                                     <v-icon>mdi-cube-outline</v-icon>
@@ -23,6 +30,12 @@
                             </v-list-item>
                         </draggable>
                     </v-list-item-group>
+<!--                    <v-row>-->
+<!--                        <v-col cols="6"><h3>Pages</h3></v-col>-->
+<!--                        <v-col cols="6" class="text-right">-->
+<!--                            <add-model></add-model>-->
+<!--                        </v-col>-->
+<!--                    </v-row>-->
                 </v-list>
             </v-col>
 
@@ -40,10 +53,14 @@
 
 import EditModel from "./EditModel";
 import ModelIndicators from "./ModelIndicators";
+import AddModel from "./AddModel";
+import ResetScaffold from "./ResetScaffold";
 
 export default {
     name: "model-list",
     components: {
+        ResetScaffold,
+        AddModel,
         ModelIndicators,
         EditModel,
     },
@@ -71,6 +88,9 @@ export default {
 
     },
     methods: {
+        upd () {
+            this.$store.commit('setScaffold', Object.assign([], this.items))
+        },
         clone (index) {
             this.$store.commit('cloneModel', index);
         },

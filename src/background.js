@@ -6,13 +6,47 @@ import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const fs = require('fs');
 const path = require('path');
+const contextMenu = require('electron-context-menu');
 
+contextMenu({
+  labels: {
+    cut: 'Cut',
+    copy: 'Copy',
+    paste: 'Paste',
+    save: 'Save Image',
+    saveImageAs: 'Save Image As…',
+    copyLink: 'Copy Link',
+    saveLinkAs: 'Save Link As…',
+    inspect: 'Inspect Element'
+  },
+  append: () => { },
+  cut: true,
+  copy: true,
+  paste: true,
+  save: true,
+  saveImageAs: true,
+  copyLink: true,
+  saveLinkAs: true,
+  inspect: true,
+
+  showLookUpSelection: true,
+  showSearchWithGoogle: true,
+  showCopyImage: true,
+  showCopyImageAddress: true,
+  showSaveImage: true,
+  showSaveImageAs: true,
+  showSaveLinkAs: true,
+  showInspectElement: true,
+  showServices: true,
+});
+
+app.allowRendererProcessReuse = false;
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
-
+// Select project on program run
 function openDir () {
   return dialog.showOpenDialog({
     properties: ['openDirectory']
@@ -21,6 +55,7 @@ function openDir () {
     else {
       let dir = result.filePaths[0];
       if (fs.existsSync(path.join(dir, '.env'))) {
+        require('dotenv').config({ path: path.join(dir, '.env') })
         return [dir];
       }
       return openDir()
@@ -38,15 +73,25 @@ async function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    backgroundColor: '#fff',
     webPreferences: {
 
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
-      contextIsolation: false
+      contextIsolation: false,
+      webviewTag: true,
+      spellcheck: true,
+
+      nativeWindowOpen: true,
+      enableRemoteModule: true,
+      sandbox:false,
+      nodeIntegrationInSubFrames:true,
     }
   })
+
+  win.maximize();
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode

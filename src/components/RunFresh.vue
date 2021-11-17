@@ -1,8 +1,7 @@
 <template>
     <v-dialog
         v-model="dialog"
-        persistent
-        max-width="290px"
+        width="490px"
     >
         <template v-slot:activator="{ on, attrs }">
             <v-tooltip bottom v-bind="attrs" v-on="on">

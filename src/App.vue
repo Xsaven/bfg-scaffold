@@ -5,21 +5,20 @@
       color="primary"
       dark
     >
-        <add-model></add-model>
+
+
+        <h2>{{title}}</h2>
+
+        <v-spacer></v-spacer>
+
+        <project-online></project-online>
+
+        <v-spacer></v-spacer>
 
         <run-cmd></run-cmd>
 
-        <v-spacer></v-spacer>
-
-        <run-rebuild :changed="changed"></run-rebuild>
-
-        <run-fresh></run-fresh>
-
-        <reset-scaffold></reset-scaffold>
-
-        <v-spacer></v-spacer>
-
         <settings></settings>
+
 
 <!--        <pin-tabs></pin-tabs>-->
 
@@ -36,19 +35,16 @@
 <script>
 
 import Settings from "./components/Settings";
-import AddModel from "./components/AddModel";
-import ResetScaffold from "./components/ResetScaffold";
-import RunRebuild from "./components/RunRebuild";
-import RunFresh from "./components/RunFresh";
 import Home from './views/Home'
 import RunCmd from "./components/RunCmd";
+import ProjectOnline from "./components/ProjectOnline";
 
 export default {
     name: 'App',
-    components: {RunCmd, Home, RunFresh, RunRebuild, ResetScaffold, AddModel, Settings},
+    components: {ProjectOnline, RunCmd, Home, Settings},
     data: () => ({
-        changed: localStorage.getItem('changed') === 'true',
-        timers: []
+        timers: [],
+        title: window.env.APP_NAME,
     }),
 
     computed: {
@@ -62,21 +58,34 @@ export default {
         watches: {
             get () {return this.$store.state.watches},
             set (value) {this.$store.commit('setState', ['watches', value])},
+        },
+        changed: {
+            get () {return this.$store.state.changed},
+            set (value) {this.$store.commit('setState', ['changed', value])},
+        },
+        project_hash: {
+            get () {return this.$store.state.project_hash},
+            set (value) {this.$store.commit('setState', ['project_hash', value])},
         }
     },
 
     watch: {
-        changed (val) {
-            localStorage.setItem('changed', val);
-        }
+
     },
 
     mounted() {
         window.app = this;
+        document.addEventListener('setScaffold', ({detail}) => {
+            this.$store.commit('setState', ['scaffold', detail]);
+        });
     },
 
     methods: {
         fileEmit (event, path, e) {
+            if (event === 'all' && window.project_online) {
+                //window.project_online.setStop();
+                window.project_online.events.push({AddFileEvent: [e, String(path).replace(window.root_dir, '')]})
+            }
             path = String(path).replace(window.root_dir+'/', '');
             this.watches.map((i, k) => {
                 if (i.file && this.is(i.file, path) && i.event === event) {

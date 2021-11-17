@@ -11,7 +11,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     total: 0,
+    project_hash: null,
     selected_model: null,
+    changed: false,
     scaffold: [],
     model_tab: 0,
     model_tabs: {},

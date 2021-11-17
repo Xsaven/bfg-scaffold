@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-row v-if="factory.length">
+        <v-row>
             <v-col cols="6">
                 <v-text-field
                     label='The amount of data (can be specified from and to "10,20")'

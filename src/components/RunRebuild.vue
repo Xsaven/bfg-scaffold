@@ -2,7 +2,7 @@
     <v-dialog
         v-model="dialog"
         persistent
-        max-width="290px"
+        width="490px"
     >
         <template v-slot:activator="{ on, attrs }">
             <v-tooltip bottom v-bind="attrs" v-on="on">
@@ -10,7 +10,7 @@
 <!--                    <v-btn text v-bind="attrs" v-on="on" @click="dialog = true; loading = false">-->
 <!--                        <v-icon>mdi-wrench</v-icon>-->
 <!--                    </v-btn>-->
-                    <v-btn text v-bind="attrs" v-on="on" @click="rebuild" :class="{red: changed}">
+                    <v-btn text v-bind="attrs" v-on="on" @click="rebuild" :class="{'red--text': changed}">
                         <v-icon>mdi-wrench</v-icon>
                     </v-btn>
                 </template>
@@ -44,7 +44,7 @@
 <script>
 export default {
     name: 'run-rebuild',
-    props: {changed: {}},
+    props: {},
     data () {
         return {
             dialog: false,
@@ -57,6 +57,10 @@ export default {
     computed: {
         cmd () {
             return this.$store.state.commands.rebuild.join(' && ');
+        },
+        changed: {
+            get () {return this.$store.state.changed},
+            set (value) {this.$store.commit('setState', ['changed', value])},
         }
     },
     methods: {

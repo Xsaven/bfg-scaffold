@@ -2,7 +2,7 @@
     <v-dialog
         v-model="dialog"
         persistent
-        max-width="290px"
+        width="490px"
     >
         <template v-slot:activator="{ on, attrs }">
             <v-tooltip bottom v-bind="attrs" v-on="on">
@@ -11,11 +11,11 @@
                         <v-icon>mdi-layers-off</v-icon>
                     </v-btn>
                 </template>
-                <span>Reset scaffold</span>
+                <span>Remove all models</span>
             </v-tooltip>
         </template>
         <v-card>
-            <v-card-title>Reset scaffold?</v-card-title>
+            <v-card-title>Remove all models?</v-card-title>
             <v-divider></v-divider>
             <v-card-actions>
                 <v-btn color="blue darken-1" text @click="dialog = false">

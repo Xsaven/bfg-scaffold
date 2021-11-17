@@ -2,7 +2,7 @@ export class ScaffoldConvertor {
 
     constructor(scaffold) {
         this.items = {};
-        this.scaffold = JSON.parse(scaffold).scaffold;
+        this.scaffold = scaffold;
         this.scaffold.map(this.touch.bind(this));
     }
 

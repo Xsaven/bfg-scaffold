@@ -7,11 +7,16 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>Bfg Scaffold</title>
       <script>
+
           window.fs = require('fs');
           window.path = require('path');
           window.exec = require('child_process').exec;
           window.chokidar = require('chokidar');
+          try {
+              window.iohook = require('iohook');
+          } catch (e) {}
           window.root_dir = process.env.DOC_ROOT_DIR;
+          window.env = process.env;
           window.camel = (str, first = false) => {
               return str.replace(/[-_]/g, ' ').replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
                   return first ? word.toUpperCase() : (index === 0 ? word.toLowerCase() : word.toUpperCase());
@@ -25,6 +30,10 @@
                   /vendor/,
                   /.idea/,
                   /.bfg-scaffold-config.json/,
+                  /database\/scaffold.json/,
+                  /storage\/packages.php/,
+                  /storage\/framework/,
+                  /storage\/logs/,
               ]
           })
               .on('all', (event, path) => window.app.fileEmit('all', path, event))
@@ -39,6 +48,11 @@
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <div class="etabs-tabgroup">
+        <div class="etabs-tabs"></div>
+        <div class="etabs-buttons"></div>
+    </div>
+    <div class="etabs-views"></div>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>

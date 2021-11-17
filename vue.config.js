@@ -4,7 +4,7 @@ module.exports = {
   ],
   pluginOptions: {
     electronBuilder: {
-      externals: ['chokidar']
+      externals: ['chokidar', 'iohook']
     }
   }
 }
