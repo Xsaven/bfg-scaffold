@@ -305,6 +305,20 @@ app.on('web-contents-created', (e, contents) => {
               await contents.loadURL('https://nodejs.org/en/docs/');
             }
           },
+          {
+            label: 'Bootstrap',
+            visible: true,
+            click: async () => {
+              await contents.loadURL('https://getbootstrap.com/');
+            }
+          },
+          {
+            label: 'Fontawesome',
+            visible: true,
+            click: async () => {
+              await contents.loadURL('https://fontawesome.com/v5.15/icons');
+            }
+          },
       ],
     });
   }

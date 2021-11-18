@@ -20,13 +20,13 @@
             <v-col v-if="menu" cols="3" style="height: calc(100vh - 64px);overflow-x: hidden">
                 <v-list shaped>
                     <v-row>
-                        <v-col cols="6"><h3>Models</h3></v-col>
+                        <v-col cols="6"><h3 style="cursor: pointer" @click="showModelList=!showModelList">Models</h3></v-col>
                         <v-col cols="6" class="text-right">
                             <reset-scaffold></reset-scaffold>
                             <add-model></add-model>
                         </v-col>
                     </v-row>
-                    <v-list-item-group color="primary">
+                    <v-list-item-group v-if="showModelList" color="primary">
                         <draggable :list="items" @change="upd">
                             <v-list-item v-for="(item, i) in items" :key="`${item.id}_${i}`" @click="active = i" :class="{'v-list-item--active': active === i}">
                                 <v-list-item-icon @click="se(8)">
@@ -47,13 +47,13 @@
                         </draggable>
                     </v-list-item-group>
                     <v-row>
-                        <v-col cols="6"><h3>Pages</h3></v-col>
+                        <v-col cols="6"><h3 style="cursor: pointer" @click="showPageList=!showPageList">Pages</h3></v-col>
                         <v-col cols="6" class="text-right">
                             <reset-pages/>
                             <add-page></add-page>
                         </v-col>
                     </v-row>
-                    <v-list-item-group color="primary">
+                    <v-list-item-group v-if="showPageList" color="primary">
                         <draggable :list="pages" @change="upd">
                             <v-list-item v-for="(page, i) in pages" :key="`page_${page.id}`" @click="active = ['page', page.id]" :class="{'v-list-item--active': active[1] === page.id}">
                                 <v-list-item-icon @click.meta="openUrlDialog(page.id)">
@@ -117,6 +117,14 @@ export default {
         users: [],
     }),
     computed: {
+        showPageList: {
+            get () { return this.$store.state.showPageList; },
+            set (val) { this.$store.commit('setState', ['showPageList', val]); }
+        },
+        showModelList: {
+            get () { return this.$store.state.showModelList; },
+            set (val) { this.$store.commit('setState', ['showModelList', val]); }
+        },
         menu: {
             get () { return this.$store.state.menu; },
             set (val) { this.$store.commit('setState', ['menu', val]); }

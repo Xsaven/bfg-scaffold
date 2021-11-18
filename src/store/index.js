@@ -16,6 +16,8 @@ export default new Vuex.Store({
     menu: true,
     changed: false,
     connect: true,
+    showModelList: true,
+    showPageList: true,
     scaffold: [],
     pages: [],
     model_tab: 0,
@@ -162,6 +164,9 @@ export default new Vuex.Store({
     },
     setState (state, prop) {
       state[prop[0]] = prop[1];
+    },
+    setPageData (state, prop) {
+      state.pages[prop[0]][prop[1]] = prop[2];
     },
     setCmd (state, cmd) {
       state.cmd = String(cmd).replace(/{model}/g, window.camel(state.scaffold[state.selected_model].name, true))

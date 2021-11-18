@@ -71,12 +71,14 @@ export default {
             return false;
         });
         this.$refs.d.addEventListener('update-target-url', () => {
-            this.pages[this.index].name = this.$refs.d.getTitle();
-            this.pages[this.index].setSrc = this.$refs.d.getURL();
-            this.$store.commit('setState', ['pages', this.pages]);
+            this.$store.commit('setPageData', [this.index, 'name', this.$refs.d.getTitle()]);
+            this.$store.commit('setPageData', [this.index, 'setSrc', this.$refs.d.getURL()]);
+        });
+        this.$refs.d.addEventListener('did-finish-load', () => {
+            this.$store.commit('setPageData', [this.index, 'name', this.$refs.d.getTitle()]);
+            this.$store.commit('setPageData', [this.index, 'setSrc', this.$refs.d.getURL()]);
         });
         this.$refs.d.addEventListener("dom-ready", () => {
-            // Remove this once https://github.com/electron/electron/issues/14474 is fixed
             this.$refs.d.blur();
             this.$refs.d.focus();
         });
