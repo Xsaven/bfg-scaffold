@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, dialog } from 'electron'
+import { app, protocol, BrowserWindow, dialog, shell } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -100,7 +100,7 @@ async function createWindow() {
   } else {
     createProtocol('app')
     // Load the index.html when not in development
-    win.loadURL('app://./index.html')
+    await win.loadURL('app://./index.html')
   }
 }
 
@@ -113,10 +113,10 @@ app.on('window-all-closed', () => {
   }
 })
 
-app.on('activate', () => {
+app.on('activate', async () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  if (BrowserWindow.getAllWindows().length === 0) await createWindow()
 })
 
 // This method will be called when Electron has finished
@@ -131,7 +131,7 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString())
     }
   }
-  createWindow()
+  await createWindow()
 })
 
 // Exit cleanly on request from parent process in development mode.
@@ -148,3 +148,164 @@ if (isDevelopment) {
     })
   }
 }
+
+app.on('web-contents-created', (e, contents) => {
+  if (contents.getType() === 'webview') {
+    // open link with external browser in webview
+    contents.on('new-window', async (e, url) => {
+      e.preventDefault()
+      await shell.openExternal(url)
+    })
+    contents.on('new-window', (event) => {
+      event.preventDefault();
+      return false;
+    })
+    contextMenu({
+      window: contents,
+      labels: {
+        cut: 'Cut',
+        copy: 'Copy',
+        paste: 'Paste',
+        save: 'Save Image',
+        saveImageAs: 'Save Image As…',
+        copyLink: 'Copy Link',
+        saveLinkAs: 'Save Link As…',
+        inspect: 'Inspect Element'
+      },
+      append: () => { },
+      cut: true,
+      copy: true,
+      paste: true,
+      save: true,
+      saveImageAs: true,
+      copyLink: true,
+      saveLinkAs: true,
+      inspect: true,
+
+      showLookUpSelection: true,
+      showSearchWithGoogle: true,
+      showCopyImage: true,
+      showCopyImageAddress: true,
+      showSaveImage: true,
+      showSaveImageAs: true,
+      showSaveLinkAs: true,
+      showInspectElement: true,
+      showServices: true,
+      prepend: () => [
+          // {
+          //   label: 'capturePage',
+          //   visible: true,
+          //   click: async () => {
+          //     let ph = await contents.capturePage();
+          //     let pr = ph.toDataURL();
+          //     console.log(pr);
+          //   }
+          // },
+          {
+            label: 'Reload',
+            visible: true,
+            click: async () => {
+              contents.reload();
+            }
+          },
+          {
+            label: 'Hard reload',
+            visible: true,
+            click: async () => {
+              contents.reloadIgnoringCache();
+            }
+          },
+          {
+            type: 'separator'
+          },
+          {
+            label: 'Back',
+            visible: true,
+            click: async () => {
+              contents.goBack();
+            }
+          },
+          {
+            label: 'Stop',
+            visible: true,
+            click: async () => {
+              contents.stop();
+            }
+          },
+          {
+            label: 'Forward',
+            visible: true,
+            click: async () => {
+              contents.goForward();
+            }
+          },
+          {
+            type: 'separator'
+          },
+          {
+            label: 'Home',
+            visible: true,
+            click: async () => {
+              await contents.loadURL(process.env.APP_URL);
+            }
+          },
+          {
+            label: 'Lte Admin',
+            visible: true,
+            click: async () => {
+              await contents.loadURL(process.env.APP_URL + '/lte');
+            }
+          },
+          {
+            label: 'Books',
+            visible: true,
+            click: async () => {
+              await contents.loadURL('http://lar.veskod.com');
+            }
+          },
+          {
+            label: 'PHP',
+            visible: true,
+            click: async () => {
+              await contents.loadURL('https://php.net');
+            }
+          },
+          {
+            label: 'Laravel',
+            visible: true,
+            click: async () => {
+              await contents.loadURL('https://laravel.com');
+            }
+          },
+          {
+            label: 'VueJs',
+            visible: true,
+            click: async () => {
+              await contents.loadURL('https://vuejs.org');
+            }
+          },
+          {
+            label: 'LiveWire',
+            visible: true,
+            click: async () => {
+              await contents.loadURL('https://laravel-livewire.com/');
+            }
+          },
+          {
+            label: 'AlpineJs',
+            visible: true,
+            click: async () => {
+              await contents.loadURL('https://alpinejs.dev/');
+            }
+          },
+          {
+            label: 'NodeJs',
+            visible: true,
+            click: async () => {
+              await contents.loadURL('https://nodejs.org/en/docs/');
+            }
+          },
+      ],
+    });
+  }
+});

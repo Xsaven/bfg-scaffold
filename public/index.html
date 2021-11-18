@@ -7,7 +7,8 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>Bfg Scaffold</title>
       <script>
-
+          window.webs = {};
+          window.electron = require('electron');
           window.fs = require('fs');
           window.path = require('path');
           window.exec = require('child_process').exec;
@@ -48,11 +49,6 @@
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div class="etabs-tabgroup">
-        <div class="etabs-tabs"></div>
-        <div class="etabs-buttons"></div>
-    </div>
-    <div class="etabs-views"></div>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>

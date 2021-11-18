@@ -6,7 +6,7 @@
         <template v-slot:activator="{ on, attrs }">
             <v-tooltip bottom v-bind="attrs" v-on="on">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn text v-bind="attrs" v-on="on" @click="open" @click.meta="run">
+                    <v-btn icon v-bind="attrs" v-on="on" @click="open" @click.meta="run">
                         <v-icon v-if="!loading">mdi-console</v-icon>
                         <v-progress-circular
                             v-else

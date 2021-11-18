@@ -46,6 +46,7 @@ export default class Storage {
             }
 
         }, 150);
+        window.saved = true;
         return 1;
     }
 

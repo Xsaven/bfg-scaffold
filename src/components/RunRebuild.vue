@@ -10,7 +10,7 @@
 <!--                    <v-btn text v-bind="attrs" v-on="on" @click="dialog = true; loading = false">-->
 <!--                        <v-icon>mdi-wrench</v-icon>-->
 <!--                    </v-btn>-->
-                    <v-btn text v-bind="attrs" v-on="on" @click="rebuild" :class="{'red--text': changed}">
+                    <v-btn icon v-bind="attrs" v-on="on" @click="rebuild" :class="{'red--text': changed}">
                         <v-icon>mdi-wrench</v-icon>
                     </v-btn>
                 </template>

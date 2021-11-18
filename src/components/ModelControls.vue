@@ -8,7 +8,7 @@
             <run-fresh></run-fresh>
             <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn text v-bind="attrs" v-on="on" @click="clone">
+                    <v-btn icon v-bind="attrs" v-on="on" @click="clone">
                         <v-icon>mdi-content-copy</v-icon>
                     </v-btn>
                 </template>

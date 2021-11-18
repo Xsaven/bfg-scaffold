@@ -19,6 +19,8 @@
 
         <settings></settings>
 
+        <toggle-menu></toggle-menu>
+
 
 <!--        <pin-tabs></pin-tabs>-->
 
@@ -38,10 +40,11 @@ import Settings from "./components/Settings";
 import Home from './views/Home'
 import RunCmd from "./components/RunCmd";
 import ProjectOnline from "./components/ProjectOnline";
+import ToggleMenu from "./components/ToggleMenu";
 
 export default {
     name: 'App',
-    components: {ProjectOnline, RunCmd, Home, Settings},
+    components: {ToggleMenu, ProjectOnline, RunCmd, Home, Settings},
     data: () => ({
         timers: [],
         title: window.env.APP_NAME,
@@ -51,6 +54,10 @@ export default {
       model () {
           return this.$store.getters.model;
       },
+        menu: {
+          get () { return this.$store.state.menu; },
+          set (val) { this.$store.commit('setState', ['menu', val]); }
+        },
         last_child_report: {
           get () { return this.$store.state.last_child_report; },
           set (val) { this.$store.commit('setLastChildReport', val); }

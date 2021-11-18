@@ -1,35 +1,29 @@
 <template>
     <v-dialog
         v-model="dialog"
+        persistent
         width="490px"
     >
         <template v-slot:activator="{ on, attrs }">
             <v-tooltip bottom v-bind="attrs" v-on="on">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn icon v-bind="attrs" v-on="on" @click="dialog = true; loading = false">
-                        <v-icon>mdi-cog-refresh</v-icon>
+                    <v-btn icon v-bind="attrs" v-on="on" @click="reset">
+                        <v-icon>mdi-layers-off</v-icon>
                     </v-btn>
                 </template>
-                <span>Run fresh</span>
+                <span>Remove all pages</span>
             </v-tooltip>
         </template>
-        <v-progress-linear
-            v-if="loading"
-            color="deep-purple accent-4"
-            indeterminate
-            rounded
-            height="6"
-        ></v-progress-linear>
-        <v-card v-else>
-            <v-card-title>Run fresh scaffold?</v-card-title>
+        <v-card>
+            <v-card-title>Remove all models?</v-card-title>
             <v-divider></v-divider>
             <v-card-actions>
                 <v-btn color="blue darken-1" text @click="dialog = false">
                     Cancel
                 </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn color="red darken-1" text @click="fresh">
-                    Fresh
+                <v-btn color="red darken-1" text @click="reset">
+                    Reset
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -39,26 +33,24 @@
 
 <script>
 export default {
-    name: 'run-fresh',
+    name: 'reset-pages',
     props: {},
     data () {
         return {
             dialog: false,
-            loading: false,
         }
     },
     watch: {
     },
     computed: {
-        cmd () {
-            return this.$store.state.commands.fresh.join(' && ');
-        }
+        pages: {
+            get () { return this.$store.state.pages},
+            set (value) {this.$store.commit('setState', ['pages', value])},
+        },
     },
     methods: {
-        async fresh () {
-            this.dialog = false;
-            await window.cmd.set(this.cmd, 1);
-            if (window.app) window.app.changed = false;
+        reset () {
+            this.pages = [];
         }
     }
 }

@@ -28,6 +28,7 @@
     "roboto-fontface": "*",
     "ssh2": "^1.5.0",
     "vue": "^2.6.11",
+    "vue-codemirror": "^4.0.6",
     "vue-json-edit": "^1.4.3",
     "vue-router": "^3.2.0",
     "vuedraggable": "^2.24.3",

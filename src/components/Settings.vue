@@ -8,7 +8,7 @@
         <template v-slot:activator="{ on, attrs }">
             <v-tooltip bottom v-bind="attrs" v-on="on">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn text v-bind="attrs" v-on="on" @click="dialog = true">
+                    <v-btn icon v-bind="attrs" v-on="on" @click="dialog = true">
                         <v-icon>mdi-cogs</v-icon>
                     </v-btn>
                 </template>

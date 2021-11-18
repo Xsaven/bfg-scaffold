@@ -1,41 +1,12 @@
 <template>
-    <v-dialog
-        v-model="dialog"
-        hide-overlay
-        transition="dialog-bottom-transition"
-    >
+    <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
-            <v-tooltip bottom v-bind="attrs" v-on="on">
-                <template v-slot:activator="{ on, attrs }">
-<!--                    <v-btn text v-bind="attrs" v-on="on" @click="dialog = true">-->
-<!--                        <v-icon>mdi-plus-circle</v-icon>-->
-<!--                    </v-btn>-->
-                    <v-btn text v-bind="attrs" v-on="on" @click="addModel">
-                        <v-icon>mdi-plus-circle</v-icon>
-                    </v-btn>
-                </template>
-                <span>Add model</span>
-            </v-tooltip>
+            <v-btn icon v-bind="attrs" v-on="on" @click="addModel">
+                <v-icon>mdi-plus-circle</v-icon>
+            </v-btn>
         </template>
-        <v-card>
-            <v-toolbar dark color="primary">
-                <v-toolbar-title>Add model</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-toolbar-items>
-                    <v-btn dark text @click="addModel">
-                        Add
-                    </v-btn>
-                </v-toolbar-items>
-            </v-toolbar>
-            <v-card-text>
-                <br>
-                <v-container>
-                    <v-text-field v-model="model.name" @keyup.enter="addModel" label="Model name"></v-text-field>
-                    <v-text-field v-model="model.title" @keyup.enter="addModel" label="Model title"></v-text-field>
-                </v-container>
-            </v-card-text>
-        </v-card>
-    </v-dialog>
+        <span>Add model</span>
+    </v-tooltip>
 </template>
 
 <script>

@@ -120,7 +120,7 @@ export default {
                 {name: "Console", icon: "console-line"},
                 {name: "File watcher", icon: "file-eye-outline"},
             ],
-            tabStyle: "height: calc(100vh - 145px);overflow-x: hidden"
+            tabStyle: "height: calc(100vh - 125px);overflow-x: hidden"
         }
     },
     computed: {

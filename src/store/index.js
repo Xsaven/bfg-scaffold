@@ -13,8 +13,11 @@ export default new Vuex.Store({
     total: 0,
     project_hash: null,
     selected_model: null,
+    menu: true,
     changed: false,
+    connect: true,
     scaffold: [],
+    pages: [],
     model_tab: 0,
     model_tabs: {},
     commands: {
@@ -122,6 +125,13 @@ export default new Vuex.Store({
       factory.name = '';
       factory.value = '';
       state.scaffold[state.selected_model].factory.push(factory);
+    },
+    addPage (state, page = {}) {
+      page.id = Math.floor(Math.random() * 999999999);
+      if (!page.name) page.name = '';
+      if (!page.src) page.src = '';
+      if (!page.setSrc) page.setSrc = null;
+      state.pages.push(page);
     },
     addSeed (state, seed = {}) {
       state.scaffold[state.selected_model].seed.push(seed);

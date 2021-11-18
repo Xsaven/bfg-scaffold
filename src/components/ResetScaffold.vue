@@ -7,7 +7,7 @@
         <template v-slot:activator="{ on, attrs }">
             <v-tooltip bottom v-bind="attrs" v-on="on">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn text v-bind="attrs" v-on="on" @click="dialog = true">
+                    <v-btn icon v-bind="attrs" v-on="on" @click="dialog = true">
                         <v-icon>mdi-layers-off</v-icon>
                     </v-btn>
                 </template>
@@ -43,11 +43,15 @@ export default {
     watch: {
     },
     computed: {
-
+        items: {
+            get () { return this.$store.state.scaffold},
+            set (value) {this.$store.commit('setScaffold', value)},
+        },
     },
     methods: {
         reset () {
-            window.s.reset();
+            //window.s.reset();
+            this.items = [];
         }
     }
 }
