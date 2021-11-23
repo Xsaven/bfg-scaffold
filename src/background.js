@@ -1,12 +1,18 @@
 'use strict'
 
+import newVm from './ElectronInjector/Services/ServiceNewVm';
+
+
+
 import { app, protocol, BrowserWindow, dialog, shell } from 'electron'
-import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
-import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import installExtension, { VUEJS_DEVTOOLS, ANGULARJS_BATARANG, VUEJS3_DEVTOOLS, REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS, JQUERY_DEBUGGER } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const fs = require('fs');
 const path = require('path');
+const md5 = require('md5');
 const contextMenu = require('electron-context-menu');
+
+require('./ElectronInjector/Emits/EmitTest');
 
 contextMenu({
   labels: {
@@ -54,8 +60,7 @@ function openDir () {
     if (result.canceled) return app.quit();
     else {
       let dir = result.filePaths[0];
-      if (fs.existsSync(path.join(dir, '.env'))) {
-        require('dotenv').config({ path: path.join(dir, '.env') })
+      if (fs.existsSync(dir)) {
         return [dir];
       }
       return openDir()
@@ -65,31 +70,24 @@ function openDir () {
   })
 }
 
+let pathProj = null;
+
+
 async function createWindow() {
-  const path = await openDir();
-  process.env.DOC_ROOT_DIR = path[0];
+  pathProj = await openDir();
+  pathProj = pathProj[0];
+  process.env.DOC_ROOT_DIR = pathProj;
+  let envFile = path.join(pathProj, '.env');
+  process.env.DOC_ROOT_ENV = envFile;
+  if (!fs.existsSync(envFile)) {
+    let dot_env_file_data = `APP_NAME=${path.basename(pathProj)}\n` +
+        `APP_KEY=${md5(pathProj)}`;
+    fs.writeFileSync(envFile, dot_env_file_data);
+  }
+  require('dotenv').config({ path: envFile });
 
   // Create the browser window.
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    backgroundColor: '#fff',
-    webPreferences: {
-
-      // Use pluginOptions.nodeIntegration, leave this alone
-      // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: true,
-      nodeIntegrationInWorker: true,
-      contextIsolation: false,
-      webviewTag: true,
-      spellcheck: true,
-
-      nativeWindowOpen: true,
-      enableRemoteModule: true,
-      sandbox:false,
-      nodeIntegrationInSubFrames:true,
-    }
-  })
+  const win = newVm();
 
   win.maximize();
 
@@ -98,7 +96,7 @@ async function createWindow() {
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
     if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
-    createProtocol('app')
+
     // Load the index.html when not in development
     await win.loadURL('app://./index.html')
   }
@@ -123,13 +121,15 @@ app.on('activate', async () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
-  if (isDevelopment && !process.env.IS_TEST) {
-    // Install Vue Devtools
-    try {
+  try {
       await installExtension(VUEJS_DEVTOOLS)
-    } catch (e) {
-      console.error('Vue Devtools failed to install:', e.toString())
-    }
+      await installExtension(VUEJS3_DEVTOOLS)
+      await installExtension(REDUX_DEVTOOLS)
+      await installExtension(REACT_DEVELOPER_TOOLS)
+      await installExtension(ANGULARJS_BATARANG)
+      await installExtension(JQUERY_DEBUGGER)
+  } catch (e) {
+    console.error('Vue Devtools failed to install:', e.toString())
   }
   await createWindow()
 })
@@ -275,6 +275,13 @@ app.on('web-contents-created', (e, contents) => {
             visible: true,
             click: async () => {
               await contents.loadURL('https://laravel.com');
+            }
+          },
+          {
+            label: 'Faker',
+            visible: true,
+            click: async () => {
+              await contents.loadURL('https://github.com/fzaninotto/Faker');
             }
           },
           {

@@ -1,0 +1,23 @@
+.app-loading-full-screen {
+    position: fixed;
+}
+.app-loading-overlay {
+    position: absolute;
+    z-index: 3000;
+    margin: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: opacity .3s;
+}
+.app-loading-spinner {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    text-align: center;
+}
+.hide-window-element {
+    z-index: -1;
+}
