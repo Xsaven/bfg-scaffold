@@ -1,9 +1,5 @@
 'use strict'
 
-import newVm from './ElectronInjector/Services/ServiceNewVm';
-
-
-
 import { app, protocol, BrowserWindow, dialog, shell } from 'electron'
 import installExtension, { VUEJS_DEVTOOLS, ANGULARJS_BATARANG, VUEJS3_DEVTOOLS, REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS, JQUERY_DEBUGGER } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -12,7 +8,14 @@ const path = require('path');
 const md5 = require('md5');
 const contextMenu = require('electron-context-menu');
 
-require('./ElectronInjector/Emits/EmitTest');
+// Scheme must be registered before the app is ready
+protocol.registerSchemesAsPrivileged([
+  { scheme: 'app', privileges: { secure: true, standard: true } }
+]);
+
+import newVm from './ElectronInjector/Services/ServiceNewVm';
+
+//require('./ElectronInjector/Emits/EmitTest');
 
 contextMenu({
   labels: {
@@ -48,10 +51,7 @@ contextMenu({
 
 app.allowRendererProcessReuse = false;
 
-// Scheme must be registered before the app is ready
-protocol.registerSchemesAsPrivileged([
-  { scheme: 'app', privileges: { secure: true, standard: true } }
-])
+
 // Select project on program run
 function openDir () {
   return dialog.showOpenDialog({

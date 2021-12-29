@@ -12,6 +12,14 @@
                 <v-btn text :key="`constant_js_editor_del_${i}`" @click="drop(i)">
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>
+                <v-tooltip bottom :key="`constant_js_editor_clone_${i}`">
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn text v-bind="attrs" v-on="on" @click="clone(i)" small>
+                            <v-icon>mdi-content-copy</v-icon>
+                        </v-btn>
+                    </template>
+                    <span>Clone</span>
+                </v-tooltip>
             </template>
         </div>
         <br>
@@ -70,6 +78,11 @@ export default {
             this.time = setTimeout(() => {
                 this.show = true;
             }, 100);
+        },
+        clone (index) {
+            const seed = Object.assign({}, this.seed[index]);
+            this.seed.push(seed);
+            this.changed();
         }
     }
 }

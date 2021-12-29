@@ -115,8 +115,8 @@ export default {
             return this.$store.state.scaffold[this.$store.state.selected_model];
         },
         models () {
-            return this.$store.state.scaffold.filter((i,k) => {
-                return k <= this.$store.state.selected_model
+            return this.$store.state.scaffold.filter(() => {
+                return true; //k-1 <= this.$store.state.selected_model
             }).map((i) => {
                 return i.name;
             });
