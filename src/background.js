@@ -1,9 +1,11 @@
 'use strict'
 
 import { app, protocol, BrowserWindow, dialog, shell } from 'electron'
-import installExtension, { VUEJS_DEVTOOLS, ANGULARJS_BATARANG, VUEJS3_DEVTOOLS, REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS, JQUERY_DEBUGGER } from 'electron-devtools-installer'
+import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const fs = require('fs');
+// const url = require('url');
 const path = require('path');
 const md5 = require('md5');
 const contextMenu = require('electron-context-menu');
@@ -12,6 +14,8 @@ const contextMenu = require('electron-context-menu');
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ]);
+
+
 
 import newVm from './ElectronInjector/Services/ServiceNewVm';
 
@@ -96,9 +100,14 @@ async function createWindow() {
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
     if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
-
+    createProtocol('app');
     // Load the index.html when not in development
     await win.loadURL('app://./index.html')
+    // await win.loadURL(url.format({
+    //       pathname: path.join(__dirname, 'index.html'),
+    //       protocol: 'file',
+    //       slashes: true
+    // }))
   }
 }
 
@@ -123,11 +132,6 @@ app.on('activate', async () => {
 app.on('ready', async () => {
   try {
       await installExtension(VUEJS_DEVTOOLS)
-      await installExtension(VUEJS3_DEVTOOLS)
-      await installExtension(REDUX_DEVTOOLS)
-      await installExtension(REACT_DEVELOPER_TOOLS)
-      await installExtension(ANGULARJS_BATARANG)
-      await installExtension(JQUERY_DEBUGGER)
   } catch (e) {
     console.error('Vue Devtools failed to install:', e.toString())
   }

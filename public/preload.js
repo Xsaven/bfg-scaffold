@@ -30,7 +30,7 @@ window.$vm.path = require('path');
 window.$vm.axios = require('axios');
 window.$vm.chokidar = require('chokidar');
 window.$vm.lodash = require('lodash');
-window.$vm.iohook = require('iohook');
+// window.$vm.iohook = require('iohook');
 window.$vm.md5 = require('md5');
 window.$vm.vue = window.vue = window.Vue = require('vue');
 window.$vm.vuex = require('vuex');
@@ -70,17 +70,7 @@ window.$vm.services.storage_event_listeners = require('./Services/ServiceStorage
  * Emits
  */
 window.$vm.emit.chokidar = require('./Emits/EmitChokidar');
-/**
- * Store initialization
- */
-window.$vm.store = window.$vm.$store = new window.$vm.vuex.Store({
-    state: require('./Store/StoreDefaultState'),
-    mutations: require('./Store/StoreMutators'),
-    getters: require('./Store/StoreGetters'),
-    actions: require('./Store/Minor/StoreMinorActions'),
-    modules: require('./Store/Minor/StoreMinorModules'),
-    plugins: require('./Store/Minor/StoreMinorPlugins'),
-});
+
 /**
  * Initiators
  */

@@ -109,16 +109,16 @@ export default {
     },
     mounted() {
         this.runTimer();
-        let ioHook = this.$vm.iohook;
-        ioHook.on('keydown', () => this.setStop());
-        ioHook.on('keyup', () => this.setStop('keyup'));
-        ioHook.on('mouseclick', () => this.setStop('mouseclick'));
-        ioHook.on('mousedown', () => this.setStop());
-        ioHook.on('mouseup', () => this.setStop());
-        ioHook.on('mousedrag', () => this.setStop());
-        ioHook.on('mousewheel', () => this.setStop('mousewheel'));
-        ioHook.on('mousemove', () => this.setStop('mousemove'));
-        ioHook.start();
+        // let ioHook = this.$vm.iohook;
+        // ioHook.on('keydown', () => this.setStop());
+        // ioHook.on('keyup', () => this.setStop('keyup'));
+        // ioHook.on('mouseclick', () => this.setStop('mouseclick'));
+        // ioHook.on('mousedown', () => this.setStop());
+        // ioHook.on('mouseup', () => this.setStop());
+        // ioHook.on('mousedrag', () => this.setStop());
+        // ioHook.on('mousewheel', () => this.setStop('mousewheel'));
+        // ioHook.on('mousemove', () => this.setStop('mousemove'));
+        // ioHook.start();
         this.globalEventForUpdate();
     },
     watch: {

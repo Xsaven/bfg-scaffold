@@ -22,7 +22,6 @@ module.exports = {
         electronBuilder: {
             externals: [
                 'chokidar',
-                'iohook',
                 'electron-settings',
                 'lodash',
                 'vue',

@@ -49,13 +49,13 @@
                         <v-spacer></v-spacer>
                         Settings
                     </v-tab>
-                    <v-tab>
-                        <v-icon left>
-                            mdi-server-security
-                        </v-icon>
-                        <v-spacer></v-spacer>
-                        Server
-                    </v-tab>
+<!--                    <v-tab>-->
+<!--                        <v-icon left>-->
+<!--                            mdi-server-security-->
+<!--                        </v-icon>-->
+<!--                        <v-spacer></v-spacer>-->
+<!--                        Server-->
+<!--                    </v-tab>-->
                     <v-tab>
                         <v-icon left>
                             mdi-compass
@@ -78,13 +78,13 @@
                             </v-card-text>
                         </v-card>
                     </v-tab-item>
-                    <v-tab-item>
-                        <v-card flat style="height: calc(100vh - 166px);overflow-x: hidden">
-                            <v-card-text>
-                                <c-dialog-global-settings-scaffold-server />
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
+<!--                    <v-tab-item>-->
+<!--                        <v-card flat style="height: calc(100vh - 166px);overflow-x: hidden">-->
+<!--                            <v-card-text>-->
+<!--                                <c-dialog-global-settings-scaffold-server />-->
+<!--                            </v-card-text>-->
+<!--                        </v-card>-->
+<!--                    </v-tab-item>-->
                     <v-tab-item>
                         <v-card flat style="height: calc(100vh - 166px);overflow-x: hidden">
                             <v-card-text>

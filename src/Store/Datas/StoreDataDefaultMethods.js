@@ -3,5 +3,5 @@ module.exports = {
     charset: "", first: [], after: "", always: [], autoIncrement: [],
     collation: [], constrained: "", persisted: [],
     spatialIndex: [], storedAs: "", type: "", useCurrent: [],
-    useCurrentOnUpdate: [], virtualAs: [], cascadeOnDelete: [], cascadeOnUpdate: [],
+    useCurrentOnUpdate: [], virtualAs: [], cascadeOnDelete: [], cascadeOnUpdate: [], nullOnDelete: []
 };

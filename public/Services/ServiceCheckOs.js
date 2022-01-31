@@ -83,8 +83,6 @@ module.exports = function () {
             /^([^\d]+|)3.*$/.test(os_data.node.dependencies['vue'])
             || /^([^\d]+|)3.*$/.test(os_data.node.devDependencies['vue'])
         );
-    window.$vm.$store.commit('setLocalState', ['os', os]);
-    window.$vm.$store.commit('setLocalState', ['os_data', os_data]);
     window.$vm.os = os;
     window.$vm.os_data = os_data;
     return os;

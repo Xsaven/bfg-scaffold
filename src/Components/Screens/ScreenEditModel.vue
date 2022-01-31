@@ -76,13 +76,13 @@
                 <c-screen-model-commands :key="`selected_edit_commands_${model.id}`" />
             </v-card>
         </v-tab-item>
-        <v-tab-item :transition="false" class="pl-4">
-            <c-action-model-controls title="File watcher" />
-            <v-divider></v-divider>
-            <v-card v-if="model_tab===9" flat :style="tabStyle" class="container_statistic">
-                <c-screen-model-file-watch :key="`selected_edit_file_watch_${model.id}`" />
-            </v-card>
-        </v-tab-item>
+<!--        <v-tab-item :transition="false" class="pl-4">-->
+<!--            <c-action-model-controls title="File watcher" />-->
+<!--            <v-divider></v-divider>-->
+<!--            <v-card v-if="model_tab===9" flat :style="tabStyle" class="container_statistic">-->
+<!--                <c-screen-model-file-watch :key="`selected_edit_file_watch_${model.id}`" />-->
+<!--            </v-card>-->
+<!--        </v-tab-item>-->
     </v-tabs>
 </template>
 
@@ -101,7 +101,7 @@ export default {
                 {name: "Seeds", icon: "sprout-outline"},
                 {name: "Information", icon: "chart-bell-curve"},
                 {name: "Console", icon: "console-line"},
-                {name: "File watcher", icon: "file-eye-outline"},
+                // {name: "File watcher", icon: "file-eye-outline"},
             ],
             tabStyle: "height: calc(100vh - 125px);overflow-x: hidden"
         }

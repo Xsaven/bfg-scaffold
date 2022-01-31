@@ -57,29 +57,26 @@
                             </template>
                         </m-draggable>
                     </v-list-item-group>
-                    <v-row>
-                        <v-col cols="6"><h3 style="cursor: pointer" @click="show_task_list=!show_task_list">Tasks for today</h3></v-col>
-<!--                        <v-col cols="6" class="text-right">-->
-<!--                            <c-action-add-page></c-action-add-page>-->
-<!--                        </v-col>-->
-                    </v-row>
-                    <v-list-item-group v-show="show_task_list" color="success">
-                        <m-draggable :list="tasks" @change="upd">
-                            <template v-for="(task, i) in tasks">
-                                <div :key="`task_${task.id}`">
-                                    <c-menu-item-task :task="task" />
-                                    <m-draggable :list="task.child" @change="upd">
-                                        <template v-for="(childTask) in task.child">
-                                            <div :key="`task_${childTask.id}`">
-                                                <c-menu-item-task :task="childTask" :child="true" :parent="task" />
-                                            </div>
-                                        </template>
-                                    </m-draggable>
-                                    <v-divider v-if="tasks.length !== (i+1)" style="width: 93%"></v-divider>
-                                </div>
-                            </template>
-                        </m-draggable>
-                    </v-list-item-group>
+<!--                    <v-row>-->
+<!--                        <v-col cols="6"><h3 style="cursor: pointer" @click="show_task_list=!show_task_list">Tasks for today</h3></v-col>-->
+<!--                    </v-row>-->
+<!--                    <v-list-item-group v-show="show_task_list" color="success">-->
+<!--                        <m-draggable :list="tasks" @change="upd">-->
+<!--                            <template v-for="(task, i) in tasks">-->
+<!--                                <div :key="`task_${task.id}`">-->
+<!--                                    <c-menu-item-task :task="task" />-->
+<!--                                    <m-draggable :list="task.child" @change="upd">-->
+<!--                                        <template v-for="(childTask) in task.child">-->
+<!--                                            <div :key="`task_${childTask.id}`">-->
+<!--                                                <c-menu-item-task :task="childTask" :child="true" :parent="task" />-->
+<!--                                            </div>-->
+<!--                                        </template>-->
+<!--                                    </m-draggable>-->
+<!--                                    <v-divider v-if="tasks.length !== (i+1)" style="width: 93%"></v-divider>-->
+<!--                                </div>-->
+<!--                            </template>-->
+<!--                        </m-draggable>-->
+<!--                    </v-list-item-group>-->
                 </v-list>
             </v-col>
         </v-row>
@@ -110,8 +107,8 @@ export default {
             set (val) { this.$store.commit('setState', ['show_model_list', val]); }
         },
         menu: {
-            get () { return this.$store.state.menu; },
-            set (val) { this.$store.commit('setState', ['menu', val]); }
+            get () { return this.$store.state.local.menu; },
+            set (val) { this.$store.commit('setLocalState', ['menu', val]); }
         },
         active: {
             get () {return this.$store.state.selected_model},

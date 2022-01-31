@@ -11,7 +11,7 @@
 
         <v-spacer></v-spacer>
 
-        <c-action-project-online />
+<!--        <c-action-project-online />-->
 
         <v-spacer></v-spacer>
 

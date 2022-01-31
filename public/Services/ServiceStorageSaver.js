@@ -57,6 +57,9 @@ module.exports = class StorageSaver {
     }
 
     getItem () {
+        if (!this.help.easy_fs.is_file(this.file)) {
+            return null;
+        }
         let value = JSON.parse(this.help.easy_fs.get_contents(this.file));
         let globalConfigs = this.service_local_store.get(this.global_settings_key, {});
         let globalLocal = this.service_local_store.get(this.local_settings_key, {});

@@ -31,8 +31,8 @@ module.exports = {
         ...storeDatas
     },
     local: {
-        os: {},
-        os_data: {},
+        os: window.$vm.os,
+        os_data: window.$vm.os_data,
         menu: true,
         online: false,
         total_seconds: 0,
