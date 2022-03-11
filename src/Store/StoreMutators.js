@@ -19,6 +19,8 @@ module.exports = {
             model.morph_field = null;
             model.auth = false;
             model.must_verify = false;
+            model.lte_admin_delegates = false;
+            model.lte_admin_controller = false;
             model.path = 'app/Models';
             model.namespace = 'App\\Models';
             model.foreign = 'id';
@@ -61,6 +63,7 @@ module.exports = {
             field.name = `${state.scaffold[state.selected_model].id}_field_${state.scaffold[state.selected_model].fields.length}`;
         }
         field.type = "string";
+        field.admin_form = "input";
         field.params = [];
         field.methods = {};
         state.scaffold[state.selected_model].fields.push(field);

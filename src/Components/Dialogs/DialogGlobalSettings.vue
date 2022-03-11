@@ -42,6 +42,13 @@
 <!--                <c-dialog-global-settings-commands />-->
 <!--                <br><br><br>-->
                 <v-tabs vertical class="text-left">
+<!--                    <v-tab>-->
+<!--                        <v-icon left>-->
+<!--                            mdi-projector-screen-->
+<!--                        </v-icon>-->
+<!--                        <v-spacer></v-spacer>-->
+<!--                        Project-->
+<!--                    </v-tab>-->
                     <v-tab>
                         <v-icon left>
                             mdi-tune-vertical
@@ -71,6 +78,13 @@
                         Commands
                     </v-tab>
 
+<!--                    <v-tab-item>-->
+<!--                        <v-card flat style="height: calc(100vh - 166px);overflow-x: hidden">-->
+<!--                            <v-card-text>-->
+<!--                                <c-dialog-global-settings-project />-->
+<!--                            </v-card-text>-->
+<!--                        </v-card>-->
+<!--                    </v-tab-item>-->
                     <v-tab-item>
                         <v-card flat style="height: calc(100vh - 166px);overflow-x: hidden">
                             <v-card-text>

@@ -15,47 +15,63 @@
                     hide-details="auto"
                 ></v-text-field>
             </v-col>
-            <v-col cols="6">
-                <v-checkbox
-                    v-model="created"
-                    label='Create a field "created_at"'
-                ></v-checkbox>
-            </v-col>
-            <v-col cols="6">
-                <v-checkbox
-                    v-model="updated"
-                    label='Create a field "updated_at"'
-                ></v-checkbox>
-            </v-col>
-            <v-col cols="6">
-                <v-checkbox
-                    v-model="resource.on"
-                    label="Enable resources for the model"
-                    @change="changed"
-                ></v-checkbox>
-            </v-col>
-            <v-col cols="6">
-                <v-checkbox
-                    v-model="observers.on"
-                    label='Enable observers for the model'
-                    @change="changed"
-                ></v-checkbox>
-            </v-col>
+
+            <v-row>
+                <v-col cols="4">
+                    <v-checkbox
+                        v-model="created"
+                        label='Create a field "created_at"'
+                    ></v-checkbox>
+                </v-col>
+                <v-col cols="4">
+                    <v-checkbox
+                        v-model="updated"
+                        label='Create a field "updated_at"'
+                    ></v-checkbox>
+                </v-col>
+                <v-col cols="4">
+                    <v-checkbox
+                        v-model="resource.on"
+                        label="Enable resources for the model"
+                        @change="changed"
+                    ></v-checkbox>
+                </v-col>
+                <v-col cols="4">
+                    <v-checkbox
+                        v-model="observers.on"
+                        label='Enable observers for the model'
+                        @change="changed"
+                    ></v-checkbox>
+                </v-col>
+                <v-col cols="4">
+                    <v-checkbox
+                        v-model="auth"
+                        label="Make an authorization model"
+                    ></v-checkbox>
+                </v-col>
+                <v-col cols="4">
+                    <v-checkbox
+                        v-model="must_verify"
+                        label="Verification of an authorized user according to EMAIL."
+                        :disabled="!auth"
+                    ></v-checkbox>
+                </v-col>
+<!--                <v-col cols="3" v-if="$vm.os.lte_admin">-->
+<!--                    <v-checkbox-->
+<!--                        v-model="lte_admin_delegates"-->
+<!--                        label="Lte Admin Delegates"-->
+<!--                    ></v-checkbox>-->
+<!--                </v-col>-->
+<!--                <v-col cols="3" v-if="$vm.os.lte_admin">-->
+<!--                    <v-checkbox-->
+<!--                        v-model="lte_admin_controller"-->
+<!--                        label="Lte Admin Controller"-->
+<!--                        :disabled="!lte_admin_delegates"-->
+<!--                    ></v-checkbox>-->
+<!--                </v-col>-->
+            </v-row>
 
 
-            <v-col cols="6">
-                <v-checkbox
-                    v-model="auth"
-                    label="Make an authorization model"
-                ></v-checkbox>
-            </v-col>
-            <v-col cols="6">
-                <v-checkbox
-                    v-model="must_verify"
-                    label="Verification of an authorized user according to EMAIL."
-                    :disabled="!auth"
-                ></v-checkbox>
-            </v-col>
             <v-col cols="12">
                 <v-text-field
                     label="Foreign field of model"
@@ -222,6 +238,14 @@ export default {
         must_verify: {
             get () { return this.$store.getters.model.must_verify; },
             set (val) {this.$store.commit('setModelOption', ['must_verify', val])},
+        },
+        lte_admin_delegates: {
+            get () { return this.$store.getters.model.lte_admin_delegates; },
+            set (val) {this.$store.commit('setModelOption', ['lte_admin_delegates', val])},
+        },
+        lte_admin_controller: {
+            get () { return this.$store.getters.model.lte_admin_controller; },
+            set (val) {this.$store.commit('setModelOption', ['lte_admin_controller', val])},
         },
         observers: {
             get () { return this.$store.getters.model.observers; },

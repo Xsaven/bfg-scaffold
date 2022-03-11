@@ -24,6 +24,7 @@ export default (Vue) => {
     Vue.component('c-dialog-global-settings-scaffold-server', require('../Components/Dialogs/DialogGlobalSettingsScaffoldServer').default);
     Vue.component('c-dialog-global-settings-commands', require('../Components/Dialogs/DialogGlobalSettingsCommnads').default);
     Vue.component('c-dialog-global-settings-program', require('../Components/Dialogs/DialogGlobalSettingsProgram').default);
+    Vue.component('c-dialog-global-settings-project', require('../Components/Dialogs/DialogGlobalSettingsProject').default);
     /**
      * Inputs
      */

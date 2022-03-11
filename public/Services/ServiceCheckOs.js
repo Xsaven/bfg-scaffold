@@ -34,8 +34,8 @@ module.exports = function () {
 
     let checkComposerList = {
         bfg_scaffold: 'bfg/scaffold',
-        lte_admin: 'lte-admin',
-        lte_ws: 'lte-admin',
+        lte_admin: 'lar/lte-admin',
+        //lte_ws: 'lte-admin',
         laravel: 'laravel/framework',
         laravel_fortify: 'laravel/fortify',
         laravel_sanctum: 'laravel/sanctum',

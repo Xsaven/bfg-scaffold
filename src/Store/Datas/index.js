@@ -6,6 +6,8 @@ module.exports = {
     default_model_fields: require('./StoreDataDefaultModelFields'),
     default_traits: require('./StoreDataDefaultTraits'),
     field_types: require('./StoreDataFieldTypes'),
+    admin_inputs: require('./StoreDataAdminInputs'),
+    admin_inputs2: require('./StoreDataAdminInputs'),
     relation_types: require('./StoreDataRelationTypes'),
     validation_rules: require('./StoreDataValidationRules'),
 }

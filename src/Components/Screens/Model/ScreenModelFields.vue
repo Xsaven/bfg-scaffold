@@ -14,6 +14,9 @@
                     <th class="text-left">
                         Properties
                     </th>
+<!--                    <th class="text-left" v-if="$vm.os.lte_admin">-->
+<!--                        Admin form-->
+<!--                    </th>-->
                     <th class="text-left">
                         Methods
                     </th>
@@ -39,7 +42,7 @@
                             @change="changed"
                             @keyup="changed"
                             :search-input.sync="item.name"
-                            :items="[...[item.name ? item.name : ''], ...fieldNames]"
+                            :items="[...[item.name ? item.name : ''], ...fieldNames.filter(zz => String(zz).indexOf(item.name) >= 0 || !item.name)]"
                         ></v-autocomplete>
                     </td>
                     <td>
@@ -60,6 +63,17 @@
                             @change="changed"
                         ></v-combobox>
                     </td>
+
+<!--                    <td v-if="$vm.os.lte_admin">-->
+<!--                        <v-autocomplete-->
+<!--                            v-model="item.admin_form"-->
+<!--                            @change="changed"-->
+<!--                            @keyup="changed"-->
+<!--                            :search-input.sync="item.admin_form"-->
+<!--                            :items="[...[item.admin_form ? item.admin_form : ''], ...Object.assign([], $store.state.global.admin_inputs2).filter(zzz => String(zzz).indexOf(item.admin_form) >= 0 || !item.admin_form)]"-->
+<!--                        ></v-autocomplete>-->
+<!--                    </td>-->
+
                     <td>
                         <c-input-json-editor v-model="item.methods" @change="changed" :defaults="$store.state.global.default_methods" :key="`field_js_editor_${item.name}`" />
                     </td>

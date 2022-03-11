@@ -8,7 +8,8 @@ module.exports = class ScaffoldConvertor {
 
     touch (model) {
         this.items[model.name] = {const: {title: model.title}};
-        this.setAuth(model)
+        this.setAdmin(model)
+            .setAuth(model)
             .setType(model)
             .setTraits(model)
             .setHidden(model)
@@ -19,6 +20,16 @@ module.exports = class ScaffoldConvertor {
             .setRules(model)
             .setRelations(model)
             .setSeeds(model);
+    }
+
+    setAdmin (model) {
+        if (model.lte_admin_delegates) {
+            this.items[model.name].lte_admin_delegates = true;
+        }
+        if (model.lte_admin_controller) {
+            this.items[model.name].lte_admin_controller = true;
+        }
+        return this;
     }
 
     setAuth (model) {
