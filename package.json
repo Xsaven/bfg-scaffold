@@ -24,7 +24,6 @@
     "electron-context-menu": "^3.1.1",
     "electron-settings": "^4.0.2",
     "electron-tabs": "^0.15.0",
-    "iohook": "^0.9.3",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "php-parser": "^3.0.3",
